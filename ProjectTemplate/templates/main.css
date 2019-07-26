@@ -1,0 +1,42 @@
+* {
+    box-sizing: 		border-box;
+}
+
+body {
+    background-color: white;
+    font-family: 	    sans-serif;
+}
+
+.beg {background-color: white;}
+.blu {background-color: hsl(194, 100%, 50%);}
+
+.headers {
+    margin: auto; 
+    font-size: 			30px;		
+    text-align: 		center;
+}
+
+.sidenav {
+    height: 100%; 
+    width: 160px; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0; 
+    left:0; 
+    background-color: hsl(194, 100%, 50%); 
+    overflow-x: hidden; 
+    padding-top: 20px; 
+}
+
+.sidenav a{
+    padding: 6px 8px 6px 16px; 
+    text-decoration: none; 
+    font-size: 25px; 
+    color: white; 
+    display: block; 
+}
+
+.sidenav a:hover {
+    color: #f1f1f1; 
+}
+
