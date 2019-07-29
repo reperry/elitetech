@@ -96,4 +96,12 @@ a {
         border-radius: 0px;
     }
 }
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: rgb(206, 206, 206);
+    text-align: center;
+}
     
