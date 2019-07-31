@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>Contact Us</title>
+		<link rel="stylesheet" type="text/css" href="WestValleySpartansCSS.css">
+	</head>
+<body>
+	<header>
+		<h1> West Valley Spartans </h1>
+		<div id="navBarDiv">
+				<nav id="navBar">
+					<ul class="navList">
+						<li class="navButtons"><a href="WestValleySpartans.html" class="links">Home</a></li>
+						<li class="navButtons"><a href="SpartanSwag.html" class="links">Spartan Swag</a></li>
+						<li class="navButtons"><a href="ContactUs.html" class="links">Contact</a></li>
+						<li class="navButtons"><a href="Sponsors.html" class="links">Sponsors</a></li>
+					</ul>
+				</nav>
+			</div>
+	</header>
+
+<main>
+
+<h1>Contact Us</h1>
+
+<div id="ContactUs">
+
+<h2>Address: 1234 Main Street, Phoenix, AZ 85001</h2>
+<h2>Phone: 602-502-2873</h2>
+<h2>Email Address: WestValleySpartans@gmail.com </h2>
+
+<form>
+<div id= "forms">
+<label id="f" for="fname">First Name: </label>
+<input type="string" name="fname" id="fname" value="">
+<br>
+
+<label id="l" for="lname">Last Name: </label>
+<input type="string" name="lname" id="lname" value="">
+<br>
+
+<label for="email">Email Address: </label>
+<input type="email" name="Email Address: "id="email" value="">
+<br>	
+</div>
+
+<div id="msgarea">
+<label for="msg">Leave a Message: </label>
+<br>
+
+<textarea rows="15" cols="50" wrap="physical" id="msg" name="msg" value=""></textarea>
+</div>
+</form>
+
+
+<br>
+<div id="submit">
+<button onclick = "sendMessage()">Submit</button>
+</div>
+
+
+</div>
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+
+function sendMessage()  {
+
+	Email.send({
+    Host : "smtp.gmail.com",
+    Username : "testemailbs4220147",
+    Password : "Cis425test!",
+    To : 'westvalleyspartans@gmail.com',
+    From : document.getElementById('email').value,
+    Subject : "Request for information on Youth Football",
+    Body : "Name: " + document.getElementById('fname').value + " " + document.getElementById('lname').value + " \nFeedback: " + document.getElementById('msg').value
+    }).then(message => alert("A Coach will reach out shortly. Welcome to your Football Family"));
+
+	document.getElementById('msgarea').innerHTML = 'THANK YOU FOR YOUR FEEDBACK!';
+	document.getElementById('submit').innerHTML = '';
+	document.getElementById('forms').innerHTML = '';
+	
+	}
+
+
+
+</script>
+
+</main>
+
+<footer>
+		<div id="emailaddress">
+			<p>westvalleyspartans@gmail.com</p>
+		</div>
+		<div id="trademark">
+			<p>© 2018 by West Valley Spartans</p>
+		</div>
+		
+		<div id="socialmedia">
+			<p>Follow Us!</p>
+			<a href="https://www.facebook.com/westvalleyspartans" target="_blank"><img src="facebooklogo.png" id="facebook"></a>
+			<a href="https://www.instagram.com/westvalleyspartansaz" target="_blank"><img src="Instagram-Logo.jpg" id="instagram"></a>
+		</div>
+		
+	</footer>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="TestCSS.css">
+</head>
+</head>
+<body>
+	<header>
+		<h1> West Valley Spartans </h1>
+		<div id="navBarDiv">
+				<nav id="navBar">
+					<ul class="navList">
+						<li class="navButtons"><a href="WestValleySpartans.html" class="links">Home</a></li>
+						<li class="navButtons"><a href="SpartanSwag.html" class="links">Spartan Swag</a></li>
+						<li class="navButtons"><a href="ContactUs.html" class="links">Contact</a></li>
+						<li class="navButtons"><a href="ContactUs.html" class="links">Sponsors</a></li>
+					</ul>
+				</nav>
+			</div>
+	</header>
+
+	<main>
+	<h1>Spartan Swag</h1>
+	<div id="swagPage">
+		<div id="cartBox">
+	 			<h3>Cart</h3>
+	 			<p id="price"></p>
+	 			<table id="cart">
+	 				<tr>
+	 					<td><p><b>Sales tax at 7%:</b></p></td>
+	 					<td><p id="tax"></p></td>
+	 				</tr>
+	 				<tr>
+	 					<td><p><b>Shipping and Handling Fees (1%):</b></p></td>
+	 					<td><p id="fees"></p></td>
+	 				</tr>
+	 				<tr>
+	 					<td><p><b>Total Cost:</b></p>
+	 					</td>
+	 					<td></p><p id="tcost"></p></td>
+	 				</tr>
+	 			</table>
+	 			<button onclick="purchase()" id="purchaseButton">Purchase</button>
+	 			<button onclick="clearCart()" id="clearButton">Clear</button>
+ 		</div>
+		<div id="productTable">
+			<form>
+		 		<table id="products">
+				 	<tr>
+				 		<td class="items"><img src="SportAdultSportTonalBlendFleeceHood.png" alt="Adult Sweatshirt" class="itemImages"> <p class="productText"> Adult Sweatshirt <br>$20</p>
+				 		<input type="button" name="Adult Sweatshirt" value="Add to Cart" class="cartButtons" id="7" onclick="getPrice(this.id, this.name)"></td>
+				    	
+				    	<td class="items"><img src="SportYouthB-CoreLongSleeveHoodTee.png" alt="Youth Sweatshirt" class="itemImages">
+				    	<p class="productText"> Youth Sweatshirt <br> $25</p><input type="button" name="Youth Sweatshirt" value="Add to Cart" class="cartButtons" id="3" onclick="getPrice(this.id, this.name)"></td>
+				   		
+				   		<td class="items"><img src="LongSleevePerformanceTee.png" alt="Adult Longsleeve" class="itemImages">
+				   		<p class="productText"> Adult Longsleeve <br>$20</p><input type="button" name="Adult Longsleeve" value="Add to Cart" class="cartButtons" id="1"  onclick="getPrice(this.id, this.name)"></td>
+				   	</tr>
+
+				   	<tr>
+				   		<td class="items"><img src="SportAdultYouthTonalBlendPanelTee.png" alt="Adult Shortsleeve" class="itemImages"> <p class="productText"> Adult Shortsleeve <br> $20</p>
+				   		<input type="button" name="Adult Shortsleeve" value="Add to Cart" class="cartButtons" id="4"  onclick="getPrice(this.id, this.name)"></td>
+
+				    	<td class="items"> <img src="SportLadiesTonalBlendV-NeckTee.png" alt="Women's Shortsleeve" class="itemImages"> <p class="productText"> Women's Shortsleeve <br> $20</p>
+				    	<input type="button" name="Women's Shortsleeve" value="Add to Cart" class="cartButtons" id="6" onclick="getPrice(this.id, this.name)"></td>
+
+				   		<td class="items"><img src="AdultYouthC2PerformanceTee.png" alt="Performance Tee" class="itemImages">
+				   		<p class="productText"> Performance Tee<br> $20</p><input type="button" name="Performance Tee" value="Add to Cart" class="cartButtons" id="9" onclick="getPrice(this.id, this.name)"></td>
+				   	</tr>
+
+				   	<tr>
+				   		<td class="items"><img src="SportAdultYouthTonalBlendPanelShort.png" alt="Youth Shorts" class="itemImages">
+				   		<p class="productText"> Youth Shorts <br>$20</p><input type="button" name="Youth Shorts" value="Add to Cart" class="cartButtons" id="5" onclick="getPrice(this.id, this.name)"></td>
+
+				    	<td class="items"><img src="MouthguardwithConnectedStrap.png" alt="Youth Mouthguard" class="itemImages"><p class="productText"> Youth Mouthguard<br> $10</p><input type="button" name="Youth Mouthguard" value="Add to Cart" class="cartButtons" id="2" onclick="getPrice(this.id, this.name)"></td>
+
+				   		<td class="items"><img src="UnderArmourMen'sF6Glove.png" alt="Youth Gloves" class="itemImages">
+				   		<p class="productText"> Youth Gloves <br>$20</p><input type="button" name="Youth Gloves" value="Add to Cart" class="cartButtons" id="8" onclick="getPrice(this.id, this.name)"></td>
+				   	</tr>
+
+		 		</table>
+	 		</form>
+ 		</div>
+
+ 	</div>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript">
+
+	totalTax = 0
+	totalFees = 0
+	totalCost = 0
+
+	function getPrice(id, name) {
+		$.get(("/import?data=" + id), function (data) {
+		$("#price").append(name + "      $" + data +" <br>");
+		totalTax += (data*.07);
+		totalFees += (data*.01);
+		totalCost += (parseFloat(data) + totalTax + totalFees);
+        // $("#price").html("$" + data);
+        $("#tax").html("&emsp; &emsp;$" + totalTax.toFixed(2));
+        $("#fees").html("&emsp; &emsp;$" + totalFees.toFixed(2));
+        $("#tcost").html("&emsp; &emsp;$" + totalCost.toFixed(2));
+    });
+	}
+
+	function purchase(){
+		totalTax = 0;
+		totalFees = 0;
+		totalCost = 0;
+		$("#price, #tax, #fees, #tcost").empty();
+		alert("Thanks for supporting the Spartans!");
+	}
+
+	function clearCart(){
+		totalTax = 0;
+		totalFees = 0;
+		totalCost = 0;
+		$("#price, #tax, #fees, #tcost").empty();
+	}
+	</script>
+		
+	</main>
+ 	<footer>
+		<div id="emailaddress">
+			<p>westvalleyspartans@gmail.com</p>
+		</div>
+		<div id="trademark">
+			<p>© 2019 by West Valley Spartans</p>
+		</div>
+		
+		<div id="socialmedia">
+			<a href="https://www.facebook.com/westvalleyspartans" target="_blank"><img src="facebooklogo.png" alt="Facebook Logo" id="facebook"></a>
+			<a href="https://www.instagram.com/westvalleyspartansaz" target="_blank"><img src="instagramlogo.png" alt="Instagram Logo" id="instagram"></a>
+		</div>
+		
+	</footer>
+</body>

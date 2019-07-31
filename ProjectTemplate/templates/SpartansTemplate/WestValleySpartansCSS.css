@@ -1,0 +1,342 @@
+body{
+	background-color: black;
+	margin: 0px;
+	padding: 0px;
+	height: auto;
+}
+
+main{
+	background-color: black;
+	height: auto;
+
+}
+
+
+/*Header*/
+
+header{
+	overflow: auto;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-image: url("steelbackground.jpg");
+	border-top: solid #DAA520 5px;
+	border-bottom: solid #DAA520 5px;
+}
+
+#navBarDiv{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#navBar{
+	display: inline-block;
+	margin-left: -3%;
+	padding: 10px;
+}
+
+#navList{
+	position: absolute;
+	left: 50%;
+	width: 520px;
+	margin-left: -200px;
+	padding: 0;
+	list-style-type: none; 
+	font-family: Impact;
+}
+
+h1{
+	margin: 30px;
+	font-size: 50pt;
+	font-family: Impact;
+	text-align: center;
+	color: #DAA520;
+}
+
+.navButtons{
+	float: left;
+	display: block;
+	background-color: #DAA520;
+	width: 100px;
+	text-align: center;
+	padding: 10px;
+	margin: 5px;
+	text-decoration: none; 
+	color: #8C1D40;
+	font-family: Impact;
+}
+
+.links{
+	display:inline-block; 
+	width:100%;
+	height:100%;
+}
+.links:link{
+	color:black;
+ }
+ .links:visited{
+ 	color:black;
+ }
+/*End Header*/
+
+/*Footer */
+footer{
+	clear: both;
+ 	color: white;
+ 	height: 120px;
+ 	background-image: url("steelbackground.jpg");
+ 	border-top: solid #DAA520 5px;
+	border-bottom: solid #DAA520 5px;
+ }
+
+ footer div{
+ 	margin: 5px;
+ 	padding: 5px;
+ }
+
+#emailaddress{
+	width:300px;
+}
+ #trademark{
+	float:left;
+}
+ #socialmedia{
+ 	float:right;
+ 	position:relative;
+ 	bottom:67px;
+ }
+
+ #instagram{
+ 	float:left;
+ 	height:50px;
+ 	width:50px;
+ }
+
+ #facebook{
+ 	height:50px;
+ 	width:50px;
+ }
+ /*End Footer*/
+
+/*Contact Us Page*/
+ #ContactUs{
+	text-align: center;
+	color: white;
+	margin: auto;
+	width: 50%;
+	}
+#submit{
+	padding-bottom: 10px;
+}
+
+#fname,#lname,#email, #msg{margin: 5px;}
+#f, #l{padding-right: 20px}
+
+/*End Contact Us*/
+
+/*Swag Page*/
+
+#productTable{
+	float:left;
+	width:50%;
+	padding:20px 20px;
+	
+}
+
+
+.productText{
+	color: white;
+	text-align: center;
+	font-family: Times New Roman;
+	font-size: 14px;
+}
+#swagPage{
+	height: auto;
+}
+#cartBox{
+	position: sticky;
+	top: 0;
+	float: right;
+	height: auto;
+	width: 30%;
+	margin-top: 30px;
+	background-color: FLoralWhite;
+	padding: 15px;
+}
+
+
+#cartBox h3{
+	text-align: center;
+}
+
+.cartText{
+	color: black;
+	font-size: 14px;
+	font-family: Times New Roman; 
+}
+
+#fees, #tax, #tcost{
+	color: black;
+	font-size: 16px;
+	font-family: Times New Roman;
+}
+
+.items{
+	width:33%;
+}
+.itemImages{
+	width:  100%;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 0px;
+}
+
+.cartButtons{
+	padding:2px;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	width: 80px;
+	align-self: middle;
+}
+
+#purchaseButton{
+	float: right;
+	width:70px;
+	margin-left: 5px;
+}
+
+#clearButton{
+	float: right;
+	width:70px;
+}
+
+/*End of Swag Page*/
+
+/*Home Page*/
+
+/*Side Bar*/
+#sideBar{
+ 	width:20%;
+	height:100%;
+	float: left;
+	position: sticky;
+	top:0px;
+  	background-color: #DAA520;
+  	border-radius: 10px;
+}
+
+ #sideBar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: underline;
+  font-size: 15px;
+  color: black;
+  display: block;
+  border-radius: 15px;
+  margin: 4px;
+  font-size: 20px;
+  font-family: Impact;
+}
+
+#sideBar a:hover {
+  color: #f1f1f1;
+}
+
+.sideBarFont{
+	font-family: Impact;
+	font-size: 20px;
+	color: white;
+	padding:10px;
+
+}
+/*End Side Bar*/
+
+/*Main Body*/
+
+.homeText {
+	font-family: Impact;
+	font-size: 25px;
+	color: white;
+	padding:10px;
+}
+.homeH2{
+	font-family: Impact;
+	font-size: 60px;
+	color: white;
+	padding:10px;
+}
+
+#TeamsBlock {
+	display:block;
+	padding: 20px;
+	width:70%;
+	background-color: gray;
+	border-radius: 15px;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	margin-left: 20%;
+}
+
+.teams {
+	width: 80%;
+	margin-right:10%;
+	margin-left:10%;
+	
+
+}
+
+
+.Show{
+	display: block;
+	width: 100%;
+}
+
+
+#sponsorBlock {
+	display:block;
+	width:70%;
+	background-color: gray;
+	border-radius: 15px;
+	margin: 80px auto;
+}
+
+#teamLogo{
+	display: block;
+	width: 70%;
+	margin-left: 22%;
+}
+
+/*End Main Body*/
+/*End Home Page*/
+
+/*Sponsors*/
+.sponsorImages{
+	width: 100%;
+	height: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+	 
+}
+
+ .sponsorBoxes{
+ 	width: 10%;
+ 	height: 10%; 
+
+ }
+
+ #aboutUsBlock {
+	padding: 20px;
+	width:70%;
+	background-color: gray;
+	border-radius: 15px;
+	margin-top: 80px;
+	margin-bottom: 80px;
+	margin-left: 20%;
+}
+
+/*End Sponsors*/
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>West Valley Spartans</title>
+	<link rel="stylesheet" type="text/css" href="WestValleySpartansCSS.css">
+</head>
+<body>
+	<header>
+		<h1> West Valley Spartans </h1>
+		<div id="navBarDiv">
+				<nav id="navBar">
+					<ul class="navList">
+						<li class="navButtons"><a href="WestValleySpartans.html" class="links">Home</a></li>
+						<li class="navButtons"><a href="SpartanSwag.html" class="links">Spartan Swag</a></li>
+						<li class="navButtons"><a href="ContactUs.html" class="links">Contact</a></li>
+						<li class="navButtons"><a href="Sponsors.html" class="links">Sponsors</a></li>
+					</ul>
+				</nav>
+			</div>
+	</header>
+
+
+	<main>
+		<div id ="sideBar">
+			<nav id ="sideBarFont">
+				<h2>Page Navigation</h2>
+				<a href="#aboutUsBlock">About Us</a>
+				<a href="#TeamsBlock">Teams</a>
+				<a href="#socialmedia">Social Media</a>
+			</nav>
+		</div>
+		<div>
+			<img id="teamLogo" src="teamlogo.jpg">
+		</div>
+		
+		<div id="aboutUsBlock">
+				<!-- <img src="aboutUsImage"> -->
+				<h2 class="homeH2">About us</h2>
+				<p class="homeText">West Valley Spartans is a youth tackle football organization for ages 7- 12 years that was established in 2017.  Located in Surprise, Arizona, the West Valley Spartans serve players in the West Valley area of Phoenix.Our mission is to model and teach our players character, sportsmanship on and off the field, and to live by the Spartan Code, as well as football fundamentals and love for the game.</p>
+
+					<div>
+					  <img class="Show" src="s1.jpg">
+					  <img class="Show" src="s4.jpg">
+					  <img class="Show" src="s5.jpg">
+					  <img class="Show" src="s6.jpg">
+					  <img class="Show" src="s7.jpg">
+					  <img class="Show" src="s8.jpg">
+					  <img class="Show" src="s9.jpg">
+					  <img class="Show" src="s10.jpg">
+					</div>
+
+			<h2 class="homeH2">The Immortal Spartan of the Game</h2><p class="homeText">The entire West Valley Spartans organization aims to recognize all players for their growth and achievements.  Each game, an Immortal Spartan of the Game is chosen unanimously by all the coaches for performance, conduct, character, and sportsmanship. This is the highest honor a Spartan player can receive. The chosen player is presented with the belt at the end of the game ceremony, and their name is added to the belt, engraved forever.</p>
+		</div>
+
+		
+		<div id="TeamsBlock">
+			<h2 class="homeH2">Our Teams!</h2>
+					  <img class="teams" src="jrmajor.jpg">
+					  <img class="teams" src="midget.jpg">
+					  <img class="teams" src="peewee.jpg">
+					  <img class="teams" src="squirt.jpg">
+			
+		</div>
+
+		<script>
+		var myIndex = 0;
+		carousel();
+
+		function carousel() {
+		  var i;
+		  var x = document.getElementsByClassName("Show");
+		  for (i = 0; i < x.length; i++) {
+		    x[i].style.display = "none";  
+		  }
+		  myIndex++;
+		  if (myIndex > x.length) {myIndex = 1}    
+		  x[myIndex-1].style.display = "block";  
+		  setTimeout(carousel, 2000); // Change image every 2 seconds
+		}
+	</script>
+
+
+	</main>
+
+	<footer>
+		<div id="emailaddress">
+			<p>westvalleyspartans@gmail.com</p>
+		</div>
+			<div id="trademark">
+				<p>© 2019 by West Valley Spartans</p>
+			</div>
+			
+			<div id="socialmedia">
+				<p>Follow Us!</p>
+				<a href="https://www.facebook.com/westvalleyspartans" target="_blank"><img src="facebooklogo.png" id="facebook"></a>
+				<a href="https://www.instagram.com/westvalleyspartansaz" target="_blank"><img src="Instagram-Logo.jpg" id="instagram"></a>
+			</div>
+		
+	</footer>
+
+</body>
+</html>

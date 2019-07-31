@@ -1,0 +1,181 @@
+header{
+	overflow: auto;
+	height: 100%;
+	/*height:350px;*/
+	margin: 0px;
+	padding: 0px;
+	background-image: url("steelbackground.jpg");
+	border-top: solid #DAA520 5px;
+	border-bottom: solid #DAA520 5px;
+}
+
+#navBarDiv{
+	text-align: center;
+	margin-bottom: 50px;
+	height:20px;
+}
+
+#navBar{
+	display: inline-block;
+	margin-left: -3%;
+	padding: 10px;
+}
+
+#navList{
+	position: absolute;
+	left: 50%;
+	width: 520px;
+	margin-left: -200px;
+	padding: 0;
+	list-style-type: none; 
+}
+
+.navButtons{
+	float: left;
+	display: block;
+	background-color: #DAA520;
+	width: 100px;
+	height:100%;
+	text-align: center;
+	padding: 10px;
+	margin: 5px;
+	text-decoration: none; 
+	color: #8C1D40;
+
+	/*border-top-left-radius:15px;
+	border-top-right-radius:15px;*/
+}
+
+.links{
+	display:inline-block; 
+	width:100%;
+	height:100%;
+}
+.links:link{
+	color:black;
+ }
+ .links:visited{
+ 	color:black;
+ }
+
+body{
+	background-color: black;
+	margin: 0px;
+	padding: 0px;
+	height: auto;
+}
+
+main{
+	background-color: black;
+	height: auto;
+}
+
+h1{
+	margin: 30px;
+	font-size: 50pt;
+	font-family: Impact;
+	text-align: center;
+	color: #DAA520;
+}
+
+#productTable{
+	/*float:right;*/
+	width:50%;
+	padding:20px 20px;
+	
+}
+.productText{
+	color: white;
+	text-align: center;
+}
+#swagPage{
+	height: auto;
+}
+#cartBox{
+	position: sticky;
+	top: 0;
+	float: right;
+	height: auto;
+	width: 30%;
+	margin-top: 30px;
+	background-color: FLoralWhite;
+	padding: 15px;
+
+}
+
+#cartBox h3{
+	text-align: center;
+}
+
+.items{
+	width:33%;
+}
+.itemImages{
+	width:  100%;
+    height: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 0px;
+}
+
+.cartButtons{
+	padding:2px;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	width: 80px;
+	align-self: middle;
+
+}
+
+#purchaseButton{
+	float: right;
+	width:70px;
+	margin-left: 5px;
+}
+
+#clearButton{
+	float: right;
+	width:70px;
+}
+
+
+footer{
+	clear: both;
+ 	color: white;
+ 	height: 150px;
+ 	background-image: url("steelbackground.jpg");
+ 	border-top: solid #DAA520 5px;
+	border-bottom: solid #DAA520 5px;
+ }
+
+ footer div{
+ 	margin: 5px;
+ 	padding: 5px;
+ }
+
+ #ContactUs{
+	text-align: center;
+	color: white;
+	margin: auto;
+	width: 50%;
+	}
+
+#trademark{
+	float:left;
+}
+ #socialmedia{
+ 	float:right;
+ }
+
+ #instagram{
+ 	float:left;
+ 	height:50px;
+ 	width:50px;
+ }
+
+ #facebook{
+ 	height:50px;
+ 	width:50px;
+ }
