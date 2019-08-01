@@ -21,7 +21,7 @@ body {
     text-align: center; 
 }
 
-.un {
+#username {
     width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
@@ -41,11 +41,11 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-form.form1 {
+#form1 {
     padding-top: 40px;
 }
 
-.pass {
+#password {
     width: 76%;
     color: rgb(38, 50, 56);
     font-weight: 700;
