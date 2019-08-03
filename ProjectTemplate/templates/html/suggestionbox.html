@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css/main.css"> 
+    <link rel="stylesheet" href="../css/main.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,48 +18,59 @@
             var content = document.getElementById("post").textContent;
 
             var webMethod = "../../ProjectServices.asmx/AddPost";
-            var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"uid\":\"" + encodeURI('3') +"\"}";
+            var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"uid\":\"" + encodeURI('3') + "\"}";
 
-			//jQuery ajax method
-			$.ajax({
-				type: "POST",
-				url: webMethod,
-				data: parameters,
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (msg) {
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
                     alert(msg.d);
-				},
+                },
                 error: function (e) {
                     var response = e.d;
-					alert("this code will only execute if javascript is unable to access the webservice." + response);
-				}
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
             });
 
         }
 
     </script>
-        <div class="topnav">
-            <ul>
-            <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
-            <h3>Have a suggestion? Post it here!</h3>
-            <div class="card">
-                <!-- we need to put list of categories through database -->
-                <p>
-                    Select category:
-                    <select id="category">
-                        <option value="Suggestion">Suggestion</option>
-                        <option value="Complaint">Complaint</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <input type="checkbox" value="true">Anonymous<br>
-                </p>
-                <p id="post" class="contents" contenteditable="true"></p>
-            </div>
-            <button class="button" onclick="javascript: AddPost();">Post It!</button>
+    <div class="topnav">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="suggestionbox.html">Suggestion Box</a></li>
+            <li><a href="edit.html">Edit</a></li>
+            <div class="login-container">
+                <li><a href="login.html">Logout</a></li>
+        </ul>
+    </div>
+    <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
+    <div class="headers">
+        <!-- Suggestion Box -->
+    </div>
+    <div class="container">
+        <h3>Have a suggestion? Post it here!</h3>
+        <div class="card">
+            <!-- we need to put list of categories through database -->
+            <p>
+                Select category:
+                <select id="category">
+                    <option value="Suggestion">Suggestion</option>
+                    <option value="Complaint">Complaint</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="checkbox" value="true">Anonymous<br>
+            </p>
+            <p id="post" class="contents" contenteditable="true"></p>
         </div>
-        <div class="footer">
-            <p>I Love Football Corporations &copy;</p>
-        </div>
-    </body>
+        <button class="button" onclick="javascript: AddPost();">Post It!</button>
+    </div>
+    <div class="footer">
+        <p>I Love Football Corporations &copy;</p>
+    </div>
+</body>
 </html>
