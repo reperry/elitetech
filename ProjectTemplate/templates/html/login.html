@@ -1,31 +1,60 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link rel="stylesheet" href="../css/login_page.css"> 
-    <style> html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}</style>
+    <link rel="stylesheet" href="../css/login_page.css">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Open Sans", sans-serif
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-</head>
-<body>
-    <div class="main">
-        <p class="sign" text-align=center>Sign in</p>
-        <form id="form1" method="post" name="myform">
-        <input id="username" type="text" placeholder="Username">
-        <input id="password" type="password" placeholder="Password">
-        <a class="submit" onclick="login()">Sign in</a>
-    </div>
-    <div class="footer">
-        <p>I Love Football Corporations &copy;</p>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function LogOn(userId, pass) {
+            //the url of the webservice we will be talking to
+            var webMethod = "ProjectServices.asmx/LogOn";
+            var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d) {
+                        //server replied true, so show the accounts panel
+                        //showPanel('accountsPanel');
+                        //LoadAccounts();
+                        //window.location.replace(".\templates\suggestionbox.html");
+                        alert("Success!!"); 
+                    }
+                    else {
+                        alert("logon failed");
+                    }
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+    </script>
+</head >
+                <body>
+                    <div class="main">
+                        <p class="sign" text-align=center> Sign in</p>
+                        <form id="form1" method="post" name="myform">
+                            <input id="username" type="text" placeholder="Username">
+                            <input id="password" type="password" placeholder="Password">
+                            <a class="submit" onclick="LogOn($('#username').val(), $('#password').val())">Sign in</a>
+                         </form>
+                     </div>
+                                <div class="footer">
+                                    <p>I Love Football Corporations &copy;</p>
+                                </div>
 </body>
-<!-- JAVASCRIPT BEGINS HERE -->
-<script>
-function login() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-}
-</script>
 </html>

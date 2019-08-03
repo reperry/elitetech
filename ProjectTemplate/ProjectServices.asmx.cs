@@ -213,5 +213,59 @@ namespace ProjectTemplate
                 return "Error: " + e.Message;
             }
         }
+
+        [WebMethod(EnableSession = true)] //NOTICE: gotta enable session on each individual method
+        public bool LogOn(string un, string pass)
+        {
+            //we return this flag to tell them if they logged in or not
+            bool success = false;
+
+            //our connection string comes from our web.config file like we talked about earlier
+            string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["myDB"].ConnectionString;
+     
+            string sqlSelect = $"SELECT UserID, IsAdmin FROM Users WHERE Username= {un} AND Password= {pass}";
+
+            //set up our connection object to be ready to use our connection string
+            MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //set up our command object to use our connection, and our query
+            MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+            //tell our command to replace the @parameters with real values
+            //we decode them because they came to us via the web so they were encoded
+            //for transmission (funky characters escaped, mostly)
+            sqlCommand.Parameters.AddWithValue($"{un}", HttpUtility.UrlDecode(un));
+            sqlCommand.Parameters.AddWithValue($"{pass}", HttpUtility.UrlDecode(pass));
+
+            //a data adapter acts like a bridge between our command object and 
+            //the data we are trying to get back and put in a table object
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            //here's the table we want to fill with the results from our query
+            DataTable sqlDt = new DataTable();
+            //here we go filling it!
+            sqlDa.Fill(sqlDt);
+            //check to see if any rows were returned.  If they were, it means it's 
+            //a legit account
+            if (sqlDt.Rows.Count > 0)
+            {
+                //if we found an account, store the id and admin status in the session
+                //so we can check those values later on other method calls to see if they 
+                //are 1) logged in at all, and 2) and admin or not
+                Session["UserId"] = sqlDt.Rows[0]["UserId"];
+                Session["IsAdmin"] = sqlDt.Rows[0]["IsAdmin"];
+                success = true;
+            }
+            //return the result!
+            return success;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public bool LogOff()
+        {
+            //if they log off, then we remove the session.  That way, if they access
+            //again later they have to log back on in order for their ID to be back
+            //in the session!
+            Session.Abandon();
+            return true;
+        }
     }
 }
