@@ -16,8 +16,8 @@
     <script type="text/javascript">
         function LogOn(userId, pass) {
             //the url of the webservice we will be talking to
-            var webMethod = "ProjectServices.asmx/LogOn";
-            var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
+            var webMethod = "../../ProjectServices.asmx/LogOn";
+            var parameters = "{\"un\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
             //jQuery ajax method
             $.ajax({
                 type: "POST",
@@ -30,7 +30,7 @@
                         //server replied true, so show the accounts panel
                         //showPanel('accountsPanel');
                         //LoadAccounts();
-                        //window.location.replace(".\templates\suggestionbox.html");
+                        window.location.replace("suggestionbox.html");
                         alert("Success!!"); 
                     }
                     else {
@@ -50,7 +50,7 @@
                         <form id="form1" method="post" name="myform">
                             <input id="username" type="text" placeholder="Username">
                             <input id="password" type="password" placeholder="Password">
-                            <a class="submit" onclick="LogOn($('#username').val(), $('#password').val())">Sign in</a>
+                            <a class="submit" onclick="javascript: LogOn($('#username').val(), $('#password').val());">Sign in</a>
                          </form>
                      </div>
                                 <div class="footer">
