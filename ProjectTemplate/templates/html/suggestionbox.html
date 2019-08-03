@@ -9,6 +9,33 @@
     <title>Suggestion Box</title>
 </head>
 <body>
+            //get my values
+            var selection = document.getElementById("category");
+            var category = selection.options[selection.selectedIndex].value;
+            var content = document.getElementById("post").textContent;
+
+            var webMethod = "../../ProjectServices.asmx/AddPost";
+            var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"uid\":\"" + encodeURI('3') +"\"}";
+
+			//jQuery ajax method
+			$.ajax({
+				type: "POST",
+				url: webMethod,
+				data: parameters,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (msg) {
+                    alert(msg.d);
+				},
+                error: function (e) {
+                    var response = e.d;
+					alert("this code will only execute if javascript is unable to access the webservice." + response);
+				}
+            });
+
+        }
+
+    </script>
     <div class="topnav">
         <ul>
             <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
@@ -27,16 +54,18 @@
         <h3>Have a suggestion? Post it here!</h3>
         <div class="card">
             <!-- we need to put list of categories through database -->
-            <p>Select category: 
-                <select>
-                    <option value="category1">Category1</option> 
-                    <option value="category2">Category2</option>
-                    <option value="category3">Category3</option>
+            <p>
+                Select category:
+                <select id="category">
+                    <option value="Suggestion">Suggestion</option>
+                    <option value="Complaint">Complaint</option>
+                    <option value="Other">Other</option>
                 </select>
-                <input type="checkbox" value="true">Anonymous<br> </p>
-            <p class="contents" contenteditable="true"></p>    
+                <input type="checkbox" value="true">Anonymous<br>
+            </p>
+            <p id="post" class="contents" contenteditable="true"></p>
         </div>
-        <button class="button">Post It!</button>
+        <button class="button" onclick="javascript: AddPost();">Post It!</button>
     </div>
     <div class="footer">
         <p>I Love Football Corporations &copy;</p>
