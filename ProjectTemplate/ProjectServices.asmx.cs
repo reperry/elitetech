@@ -9,7 +9,10 @@ using System.Data;
 
 namespace ProjectTemplate
 {
+<<<<<<< HEAD
     /////////////////////////////HEAD
+=======
+>>>>>>> 2437c4b878fb7c3d2d8c21481b4ee98ab5f6c598
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
@@ -45,7 +48,11 @@ namespace ProjectTemplate
         {
             try
             {
+<<<<<<< HEAD
                 string testQuery = "select * from test";
+=======
+                string testQuery = "select * from Users";
+>>>>>>> 2437c4b878fb7c3d2d8c21481b4ee98ab5f6c598
 
                 ////////////////////////////////////////////////////////////////////////
                 ///here's an example of using the getConString method!
@@ -65,6 +72,7 @@ namespace ProjectTemplate
             }
         }
 
+<<<<<<< HEAD
         [WebService(Namespace = "http://tempuri.org/")]
         [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
         [System.ComponentModel.ToolboxItem(false)]
@@ -269,6 +277,155 @@ namespace ProjectTemplate
                 {
                     return "Error: " + e.Message;
                 }
+=======
+        [WebMethod]
+        public string AddUser(string uname, string pass)
+        {
+            try
+            {
+                string query = $"insert into elitetech.Users(Username, Password) values ('{uname}', '{pass}')";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod]
+        public string AddPost(string content, string category, string uid)
+        {
+            try
+            {
+                string query = $"insert into elitetech.Posts(UserID, Content, Category, TimeStamp) values ('{uid}', '{content}', '{category}', CURRENT_TIMESTAMP())";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod]
+        public string ReportPost(string postid)
+        {
+            try
+            {
+                string query = $"UPDATE Posts SET IsReported = 1 WHERE Postid = {postid}";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod]
+        public string LikePost(string postid)
+        {
+            try
+            {
+                string query = $"UPDATE Posts SET Likes = Likes + 1 WHERE Postid = {postid}";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod]
+        public string DeleteUser(string userid)
+        {
+            try
+            {
+                string query = $"DELETE FROM Users WHERE UserID = {userid}";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod]
+        public string DeletePost(string postid)
+        {
+            try
+            {
+                string query = $"DELETE FROM Posts WHERE PostID = {postid}";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+>>>>>>> 2437c4b878fb7c3d2d8c21481b4ee98ab5f6c598
             }
         }
     }
