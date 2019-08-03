@@ -93,6 +93,75 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="ProjectServices.asmx" />
+    <Content Include="templates\css\login_page.css" />
+    <Content Include="templates\css\main.css" />
+    <Content Include="templates\html\edit.html" />
+    <Content Include="templates\html\home.html" />
+    <Content Include="templates\html\login.html" />
+    <Content Include="templates\html\suggestionbox.html" />
+    <Content Include="templates\SpartansTemplate\2014-HDSWC_3-Tier_Logo.png" />
+    <Content Include="templates\SpartansTemplate\aboutUs.jpg" />
+    <Content Include="templates\SpartansTemplate\AdultYouthC2PerformanceTee.png" />
+    <Content Include="templates\SpartansTemplate\APES LOGO.jpg" />
+    <Content Include="templates\SpartansTemplate\AVYRELOGOLARGE.png" />
+    <Content Include="templates\SpartansTemplate\Buffalo_Wild_Wings.svg.png" />
+    <Content Include="templates\SpartansTemplate\ContactUs.html" />
+    <Content Include="templates\SpartansTemplate\DESERTTRRUSSLOGO.jpg" />
+    <Content Include="templates\SpartansTemplate\DOUBLED_SPERFORMANCE.jpg" />
+    <Content Include="templates\SpartansTemplate\facebooklogo.jpg" />
+    <Content Include="templates\SpartansTemplate\facebooklogo.png" />
+    <Content Include="templates\SpartansTemplate\FOOTBALL-FIELD.jpg" />
+    <Content Include="templates\SpartansTemplate\FootballField.jpeg" />
+    <Content Include="templates\SpartansTemplate\HDS_WhiteCap-logo-3.png" />
+    <Content Include="templates\SpartansTemplate\Instagram-Logo.jpg" />
+    <Content Include="templates\SpartansTemplate\instagramlogo.png" />
+    <Content Include="templates\SpartansTemplate\jrmajor.jpg" />
+    <Content Include="templates\SpartansTemplate\LEGALSHIELDLOGO.jpg" />
+    <Content Include="templates\SpartansTemplate\LEVELLINE.jpg" />
+    <Content Include="templates\SpartansTemplate\littleCaesarsLogo.jpg" />
+    <Content Include="templates\SpartansTemplate\logo-rosen.png" />
+    <Content Include="templates\SpartansTemplate\LongSleevePerformanceTee.png" />
+    <Content Include="templates\SpartansTemplate\MAW-logo2-360.png" />
+    <Content Include="templates\SpartansTemplate\MERITAGE-HOMES-logo2.png" />
+    <Content Include="templates\SpartansTemplate\midget.jpg" />
+    <Content Include="templates\SpartansTemplate\MouthguardwithConnectedStrap.png" />
+    <Content Include="templates\SpartansTemplate\NEXTLEVELLOGO.png" />
+    <Content Include="templates\SpartansTemplate\NIBBLERSCATERINGLOGO.png" />
+    <Content Include="templates\SpartansTemplate\peewee.jpg" />
+    <Content Include="templates\SpartansTemplate\PLATINUMPRINTINGLOGO.jpg" />
+    <Content Include="templates\SpartansTemplate\qualityblock_logo.png" />
+    <Content Include="templates\SpartansTemplate\RichisDiner15609SurpriseAZ.png" />
+    <Content Include="templates\SpartansTemplate\RUSHLOGO.png" />
+    <Content Include="templates\SpartansTemplate\RWC-Logo-2017.png" />
+    <Content Include="templates\SpartansTemplate\s1.jpg" />
+    <Content Include="templates\SpartansTemplate\s10.jpg" />
+    <Content Include="templates\SpartansTemplate\s11.jpg" />
+    <Content Include="templates\SpartansTemplate\s2.jpg" />
+    <Content Include="templates\SpartansTemplate\s3.jpg" />
+    <Content Include="templates\SpartansTemplate\s4.jpg" />
+    <Content Include="templates\SpartansTemplate\s5.jpg" />
+    <Content Include="templates\SpartansTemplate\s6.jpg" />
+    <Content Include="templates\SpartansTemplate\s7.jpg" />
+    <Content Include="templates\SpartansTemplate\s8.jpg" />
+    <Content Include="templates\SpartansTemplate\s9.jpg" />
+    <Content Include="templates\SpartansTemplate\ServerHost.js" />
+    <Content Include="templates\SpartansTemplate\SMALLCAKESOFSURPRISE.png" />
+    <Content Include="templates\SpartansTemplate\SpartanSwag.html" />
+    <Content Include="templates\SpartansTemplate\Sponsors.html" />
+    <Content Include="templates\SpartansTemplate\SportAdultSportTonalBlendFleeceHood.png" />
+    <Content Include="templates\SpartansTemplate\SportAdultYouthTonalBlendPanelShort.png" />
+    <Content Include="templates\SpartansTemplate\SportAdultYouthTonalBlendPanelTee.png" />
+    <Content Include="templates\SpartansTemplate\SportLadiesTonalBlendV-NeckTee.png" />
+    <Content Include="templates\SpartansTemplate\SportYouthB-CoreLongSleeveHoodTee.png" />
+    <Content Include="templates\SpartansTemplate\squirt.jpg" />
+    <Content Include="templates\SpartansTemplate\steelbackground.jpg" />
+    <Content Include="templates\SpartansTemplate\SwagTest.html" />
+    <Content Include="templates\SpartansTemplate\teamlogo.jpg" />
+    <Content Include="templates\SpartansTemplate\TestCSS.css" />
+    <Content Include="templates\SpartansTemplate\TFrgb4.png" />
+    <Content Include="templates\SpartansTemplate\UnderArmourMen%27sF6Glove.png" />
+    <Content Include="templates\SpartansTemplate\WestValleySpartans.html" />
+    <Content Include="templates\SpartansTemplate\WestValleySpartansCSS.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="templates\SpartansTemplate\Alliance-logo-06-26-2015.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -120,6 +190,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="templates\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
