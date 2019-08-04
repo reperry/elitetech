@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../css/main.css">
@@ -16,9 +16,10 @@
             var selection = document.getElementById("category");
             var category = selection.options[selection.selectedIndex].value;
             var content = document.getElementById("post").textContent;
+            var anon = document.getElementById('anon').checked;
 
             var webMethod = "../../ProjectServices.asmx/AddPost";
-            var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"uid\":\"" + encodeURI('3') + "\"}";
+            var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"isAnon\":\"" + encodeURI(anon) + "\"}";
 
             //jQuery ajax method
             $.ajax({
@@ -62,7 +63,7 @@
                     <option value="Complaint">Complaint</option>
                     <option value="Other">Other</option>
                 </select>
-                <input type="checkbox" value="true">Anonymous<br>
+                <input id="anon" type="checkbox" value="true">Anonymous<br>
             </p>
             <p id="post" class="contents" contenteditable="true"></p>
         </div>
@@ -73,3 +74,4 @@
     </div>
 </body>
 </html>
+
