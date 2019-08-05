@@ -64,7 +64,7 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddUser(string uname, string pass)
         {
             try
@@ -89,11 +89,24 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
-        public string AddPost(string content, string category, string uid)
+        [WebMethod(EnableSession = true)]
+        public string AddPost(string content, string category, bool isAnon)
         {
+
             try
             {
+                string uid;
+
+                if (isAnon)
+                {
+                    //anonymous userid in the database
+                    uid = "6";
+                }
+                else
+                {
+                    uid = Session["UserId"].ToString();
+                }
+
                 string query = $"insert into elitetech.Posts(UserID, Content, Category, TimeStamp) values ('{uid}', '{content}', '{category}', CURRENT_TIMESTAMP())";
 
                 ////////////////////////////////////////////////////////////////////////
@@ -114,7 +127,7 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string ReportPost(string postid)
         {
             try
@@ -139,7 +152,7 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string LikePost(string postid)
         {
             try
@@ -164,7 +177,7 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string DeleteUser(string userid)
         {
             try
@@ -189,7 +202,7 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string DeletePost(string postid)
         {
             try
