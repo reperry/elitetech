@@ -6,6 +6,7 @@ using System.Web.Services;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Web.Script.Serialization;
 
 namespace ProjectTemplate
 {
@@ -265,6 +266,81 @@ namespace ProjectTemplate
             //in the session!
             Session.Abandon();
             return true;
+        }
+
+        [WebMethod]
+        public string GetPosts()
+        {
+            try
+            {
+                string query = $"select * from Posts";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                DataSet set = new DataSet();
+                set.Tables.Add(table);
+                String result = DataSetToJSON(set);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+
+        }
+
+        [WebMethod]
+        public string GetUsers()
+        {
+            try
+            {
+                string query = $"select * from Users";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                DataSet set = new DataSet();
+                set.Tables.Add(table);
+                String result = DataSetToJSON(set);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+
+        }
+
+
+        public string DataSetToJSON(DataSet ds)
+        {
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            foreach (DataTable dt in ds.Tables)
+            {
+                object[] arr = new object[dt.Rows.Count + 1];
+                for (int i = 0; i <= dt.Rows.Count - 1; i++)
+                {
+                    arr[i] = dt.Rows[i].ItemArray;
+                }
+                dict.Add(dt.TableName, arr);
+            }
+            JavaScriptSerializer json = new JavaScriptSerializer();
+            return json.Serialize(dict);
         }
     }
 }
