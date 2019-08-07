@@ -27,11 +27,7 @@
                 dataType: "json",
                 success: function (msg) {
                     if (msg.d) {
-                        //server replied true, so show the accounts panel
-                        //showPanel('accountsPanel');
-                        //LoadAccounts();
                         window.location.replace("suggestionbox.html");
-                        alert("Success!!"); 
                     }
                     else {
                         alert("logon failed");

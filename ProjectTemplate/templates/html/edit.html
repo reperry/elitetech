@@ -9,18 +9,41 @@
     <title>Edit</title>
 </head>
 <body>
-    <div class="topnav">
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="suggestionbox.html">Suggestion Box</a></li>
-            <li><a href="edit.html">Edit</a></li>
-            <div class="login-container">
-                <li><a href="login.html">Log out</a></li>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function LogOff() {
+            var webMethod = "../../ProjectServices.asmx/LogOff";
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d) {
+                        window.location.replace("login.html");
+                    }
+                    else {
+                    }
+                },
+                error: function (e) {
+                    alert("boo...");
+                }
+            });
+        }
+    </script> 
+
+        <div class="topnav">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="suggestionbox.html">Suggestion Box</a></li>
+                <li><a href="edit.html">Edit</a></li>
+                <div class="login-container">
+                    <li><a href="#" onclick="LogOff()">Log out</a></li>
+                </div>
+            </ul>
+        </div>
+            <div class="footer">
+                <p>I Love Football Corporations &copy;</p>
             </div>
-        </ul>
-    </div>
-    <div class="footer">
-        <p>I Love Football Corporations &copy;</p>
-    </div>
-</body>
-</html>
+</body >
+</html >
