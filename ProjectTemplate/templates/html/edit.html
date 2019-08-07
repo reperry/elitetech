@@ -21,12 +21,14 @@
                 success: function (msg) {
                     if (msg.d) {
                         window.location.replace("login.html");
+                        alert("Succesfully Logged Off"); 
                     }
                     else {
+                        alert("Failed to log out"); 
                     }
                 },
                 error: function (e) {
-                    alert("boo...");
+                    alert("Failed to log out");
                 }
             });
         }

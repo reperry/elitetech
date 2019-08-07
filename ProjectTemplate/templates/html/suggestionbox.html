@@ -47,9 +47,10 @@
                 success: function (msg) {
                     if (msg.d) {
                         window.location.replace("login.html");
-                        //alert("Bye!");
+                        alert("Succesfully Logged Out"); 
                     }
                     else {
+                        alert("Failed to log out"); 
                     }
                 },
                 error: function (e) {
