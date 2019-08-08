@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿ 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/suggestion_box_page.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,10 +20,8 @@
             var category = selection.options[selection.selectedIndex].value;
             var content = document.getElementById("post").textContent;
             var anon = document.getElementById('anon').checked;
-
             var webMethod = "../../ProjectServices.asmx/AddPost";
             var parameters = "{\"content\":\"" + encodeURI(content) + "\",\"category\":\"" + encodeURI(category) + "\",\"isAnon\":\"" + encodeURI(anon) + "\"}";
-
             //jQuery ajax method
             $.ajax({
                 type: "POST",
@@ -62,7 +62,9 @@
         function LikePost() {
             //code hereee
         }
-
+        function ReportPost() {
+            //codddeee
+        }
     </script>
     <div class="topnav">
         <ul>
@@ -110,9 +112,11 @@
             <p><strong>Haena Song</strong></p>
             <p class="date">August 7th, 2019</p> 
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
+            <p class="count-likes">4 Likes</p> <!--get number of likes from DB -->
             <p class="buttons">
-                <button class="button" onclick="javascript: LikePost();">Like</button>
-                <button class="button" onclick="javascript: LikePost();">Report</button>
+                <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
+                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
+                <button class="button" onclick="javascript: ReportPost();">Report</button>
             </p>
         </p> 
     </div>
@@ -121,9 +125,11 @@
                 <p><strong>Anonymous</strong></p>
                 <p class="date">August 7th, 2019</p> 
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
+                <p class="count-likes">4 Likes</p> <!--get number of likes from DB -->
                 <p class="buttons">
-                    <button class="button" onclick="javascript: LikePost();">Like</button>
-                    <button class="button" onclick="javascript: LikePost();">Report</button>
+                    <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
+                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button> 
+                    <button class="button" onclick="javascript: ReportPost();">Report</button>
                 </p>
             </p> 
         </div>
