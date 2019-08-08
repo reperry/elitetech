@@ -1,0 +1,41 @@
+.suggestion-tables {
+    content:"";
+    display:table;
+    clear:both; 
+    background-color: #fff;
+    margin: 7em auto;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    border-radius:4px;
+    padding : 0 8px;  
+    margin: 30px; 
+}
+
+.date {
+    font-size: 10pt; 
+    color: grey; 
+}
+
+.fa {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .fa:hover {
+    color: darkblue;
+  }
+
+  .selection {
+      margin: 30px; 
+      
+  }
+
+  #myInput {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 70%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }

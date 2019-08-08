@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/suggestion_box_page.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +59,9 @@
                 }
             });
         }
+        function LikePost() {
+            //code hereee
+        }
 
     </script>
     <div class="topnav">
@@ -90,6 +94,39 @@
         </div>
         <button class="button" onclick="javascript: AddPost();">Post It!</button>
     </div>
+
+    <p class="selection">
+        <input type="text" id="myInput" placeholder="Keyword">
+        <select>
+                <option value="suggestion">Suggestion</option>
+                <option value="complaint">Complaint</option>
+                <option value="other">Other</option>
+        </select>
+        <button class="button" onclick="javascript: SearchPost();">Search</button>
+    </p>
+
+    <div class="suggestion-tables">
+        <p>
+            <p><strong>Haena Song</strong></p>
+            <p class="date">August 7th, 2019</p> 
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
+            <p class="buttons">
+                <button class="button" onclick="javascript: LikePost();">Like</button>
+                <button class="button" onclick="javascript: LikePost();">Report</button>
+            </p>
+        </p> 
+    </div>
+    <div class="suggestion-tables">
+            <p>
+                <p><strong>Anonymous</strong></p>
+                <p class="date">August 7th, 2019</p> 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
+                <p class="buttons">
+                    <button class="button" onclick="javascript: LikePost();">Like</button>
+                    <button class="button" onclick="javascript: LikePost();">Report</button>
+                </p>
+            </p> 
+        </div>
     <div class="footer">
         <p>I Love Football Corporations &copy;</p>
     </div>
