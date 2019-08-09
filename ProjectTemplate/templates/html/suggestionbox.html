@@ -1,4 +1,4 @@
-﻿ 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +14,9 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+
+
         function AddPost() {
             //get my values
             var selection = document.getElementById("category");
@@ -38,6 +41,7 @@
                 }
             });
         }
+
         function LogOff() {
             var webMethod = "../../ProjectServices.asmx/LogOff";
             $.ajax({
@@ -59,12 +63,60 @@
                 }
             });
         }
+
+        function LoadAllPosts(array) {
+            alert(typeof(array))
+            for (var i = 0; i < array.length; i++){
+                ShowPost(array[i]);
+            }
+        }
+
+        function ShowPost(post) {
+            var postid = post.postid;
+            var content = post.content;
+            var likes = post.likes;
+            var timestamp = post.timestamp;
+
+            var user = post.user;
+
+            var table = document.getElementById("suggestions");
+            var row = table.insertRow(-1);
+            row.innerHTML = `<div class="suggestion-tables" id="${postid}">
+        <p>
+            <p><strong>${user}</strong></p>
+            <p class="date">${timestamp}</p> 
+            ${content}
+            <p class="count-likes">${likes} Likes</p> 
+            <p class="buttons">
+                <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
+                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
+                <button class="button" onclick="javascript: ReportPost();">Report</button>
+            </p>
+        </p> 
+    </div>`;
+        }
         function LikePost() {
             //code hereee
         }
         function ReportPost() {
             //codddeee
         }
+
+        // Loads Post when page is opened
+        window.onload = function () {
+            $.ajax({
+                type: "POST",
+                url: "../../ProjectServices.asmx/GetPosts",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {
+                    LoadAllPosts(data.d);
+                } 
+            });
+        }
+
     </script>
     <div class="topnav">
         <ul>
@@ -107,32 +159,9 @@
         <button class="button" onclick="javascript: SearchPost();">Search</button>
     </p>
 
-    <div class="suggestion-tables">
-        <p>
-            <p><strong>Haena Song</strong></p>
-            <p class="date">August 7th, 2019</p> 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
-            <p class="count-likes">4 Likes</p> <!--get number of likes from DB -->
-            <p class="buttons">
-                <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
-                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
-                <button class="button" onclick="javascript: ReportPost();">Report</button>
-            </p>
-        </p> 
-    </div>
-    <div class="suggestion-tables">
-            <p>
-                <p><strong>Anonymous</strong></p>
-                <p class="date">August 7th, 2019</p> 
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, vel officia. Libero sint earum officiis laudantium molestiae itaque eius quis assumenda, repellendus, quibusdam molestias non omnis, veritatis mollitia magni at.
-                <p class="count-likes">4 Likes</p> <!--get number of likes from DB -->
-                <p class="buttons">
-                    <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
-                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button> 
-                    <button class="button" onclick="javascript: ReportPost();">Report</button>
-                </p>
-            </p> 
-        </div>
+    <table id="suggestions">
+    </table>
+
     <div class="footer">
         <p>I Love Football Corporations &copy;</p>
     </div>
