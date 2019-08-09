@@ -108,15 +108,15 @@ namespace ProjectTemplate
                     uid = Session["UserId"].ToString();
                 }
 
-                string query = $"insert into elitetech.Posts(UserID, Content, Category, TimeStamp) values ('{uid}', '{content}', '{category}', CURRENT_TIMESTAMP())";
+                string query = $"insert into elitetech.Posts(UserID, Content, Category, TimeStamp) values (@uid, @content, @category, CURRENT_TIMESTAMP())";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
-
                 MySqlCommand cmd = new MySqlCommand(query, con);
+
+                cmd.Parameters.AddWithValue("@uid", HttpUtility.UrlDecode(uid));
+                cmd.Parameters.AddWithValue("@content", HttpUtility.UrlDecode(content));
+                cmd.Parameters.AddWithValue("@category", HttpUtility.UrlDecode(category));
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 adapter.Fill(table);
@@ -266,36 +266,42 @@ namespace ProjectTemplate
         }
 
         [WebMethod]
-        public string GetPosts()
+        public Post[] GetPosts()
         {
             try
             {
-                string query = $"select * from Posts";
+                string query = $"select Posts.PostID, Posts.Content, Posts.Likes, Posts.TimeStamp, Users.Username from Posts inner join Users on Posts.UserID = Users.UserID";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                DataTable table = new DataTable();
+                DataTable table = new DataTable("posts");
                 adapter.Fill(table);
-                DataSet set = new DataSet();
-                set.Tables.Add(table);
-                String result = DataSetToJSON(set);
-                return result;
+
+                List<Post> posts = new List<Post>();
+                for (int i = 0; i < table.Rows.Count; i++) {
+                    posts.Add(new Post
+                    {
+                        postid = table.Rows[i][0].ToString(),
+                        content = table.Rows[i][1].ToString(),
+                        likes = Convert.ToInt32(table.Rows[i][2]),
+                        timestamp = DateTime.Parse(table.Rows[i][3].ToString()).ToString("MMMM dd, yyyy"),
+                        user = table.Rows[i][4].ToString()
+                    });
+                }
+              
+                return posts.ToArray();
             }
             catch (Exception e)
             {
-                return "Error: " + e.Message;
+                return new Post[0];
             }
 
         }
 
         [WebMethod]
-        public string GetUsers()
+        public DataTable GetUsers()
         {
             try
             {
@@ -311,33 +317,18 @@ namespace ProjectTemplate
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 adapter.Fill(table);
-                DataSet set = new DataSet();
-                set.Tables.Add(table);
-                String result = DataSetToJSON(set);
-                return result;
+                
+                return table;
+                //String result = DataSetToJSON(set);
+                //return result;
             }
             catch (Exception e)
             {
-                return "Error: " + e.Message;
+                //return "Error: " + e.Message;
+                return new DataTable();
             }
 
         }
 
-
-        public string DataSetToJSON(DataSet ds)
-        {
-            Dictionary<string, object> dict = new Dictionary<string, object>();
-            foreach (DataTable dt in ds.Tables)
-            {
-                object[] arr = new object[dt.Rows.Count + 1];
-                for (int i = 0; i <= dt.Rows.Count - 1; i++)
-                {
-                    arr[i] = dt.Rows[i].ItemArray;
-                }
-                dict.Add(dt.TableName, arr);
-            }
-            JavaScriptSerializer json = new JavaScriptSerializer();
-            return json.Serialize(dict);
-        }
     }
 }
