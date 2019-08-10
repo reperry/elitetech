@@ -87,9 +87,9 @@
             ${content}
             <p class="count-likes">${likes} Likes</p> 
             <p class="buttons">
-                <button onclick="javascript: LikePost();" style="font-size:20px;border-radius:0.25rem;">Like
+                <button class="like-button" onclick="javascript: LikePost();">Like
                     <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
-                <button class="button" onclick="javascript: ReportPost();">Report</button>
+                <button class="report-button" onclick="javascript: ReportPost();">Report</button>
             </p>
         </p> 
     </div>`;
@@ -137,6 +137,7 @@
             <p>
                 Select category:
                 <select id="category">
+                    <option value="">------------Choose Category------------</option>
                     <option value="Suggestion">Suggestion</option>
                     <option value="Complaint">Complaint</option>
                     <option value="Other">Other</option>

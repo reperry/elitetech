@@ -10,7 +10,7 @@ body {
 .blu {background-color: hsl(194, 100%, 50%);}
 
 .headers {
-    margin: auto; 
+    margin: auto;
     font-size: 			20px;		
     text-align: 		center;
     padding: 20px; 
@@ -50,6 +50,10 @@ ul {
     color: hsl(194, 100%, 50%); 
 }
 
+.logo {
+    float: left; 
+}
+
 .login-container {
     float: right; 
 }
@@ -62,7 +66,7 @@ ul {
     box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
     border-radius:4px;
     padding : 0 8px;  
-    margin: 30px;
+    margin: 30px; 
 }
 
 .card {
@@ -81,12 +85,15 @@ ul {
     text-decoration: none;
     font-size: 20px;  
     border-radius: 4px;
-    background: linear-gradient(to right, rgb(0, 162, 255), rgb(63, 201, 255));
+    background: rgb(0, 162, 255);
     color: #fff; 
     border: none; 
     padding: 5px; 
     margin: 0 0 1em 0; 
 }
+
+.button:hover {background: rgb(0, 119, 255);}
+
 
 .footer {
     /*position: fixed;*/ 
@@ -98,4 +105,63 @@ ul {
     text-align: center;
 }
 
+#reported-posts {
+    margin: 80px; 
+    border-collapse: collapse; 
+    background: white; 
+}
 
+td, th {
+    border: 1px solid #dddddd; 
+    text-align: left; 
+    padding: 8px; 
+}
+
+th {
+    font-size: 20pt; 
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd; 
+}
+
+.delete-button {
+    cursor: pointer; 
+    text-align: center; 
+    text-decoration: none;
+    font-size: 20px;  
+    border-radius: 4px;
+    background: rgb(255, 0, 0);
+    color: #fff; 
+    border: none; 
+    padding: 5px; 
+}
+
+.delete-button:hover {
+    background: rgb(165, 14, 14); 
+}
+
+.view-button {
+    cursor: pointer; 
+    text-align: center; 
+    text-decoration: none;
+    font-size: 20px;  
+    border-radius: 4px;
+    background: black;
+    color: #fff; 
+    border: none; 
+    padding: 5px; 
+}
+
+.view-button:hover {
+    background: grey; 
+}
+
+.like-button {
+    font-size:20px;border-radius:0.25rem;background:pink;border:none; 
+}
+.like-button:hover {
+    background:rgb(224, 154, 166); 
+}
+.report-button {font-size:20px;border-radius:0.25rem;background:black;border:none;color:white;}
+.report-button:hover {background:grey;}

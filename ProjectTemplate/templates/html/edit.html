@@ -9,43 +9,51 @@
     <title>Edit</title>
 </head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        function LogOff() {
-            var webMethod = "../../ProjectServices.asmx/LogOff";
-            $.ajax({
-                type: "POST",
-                url: webMethod,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    if (msg.d) {
-                        window.location.replace("login.html");
-                        alert("Succesfully Logged Off"); 
-                    }
-                    else {
-                        alert("Failed to log out"); 
-                    }
-                },
-                error: function (e) {
-                    alert("Failed to log out");
-                }
-            });
-        }
-    </script> 
-
-        <div class="topnav">
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="suggestionbox.html">Suggestion Box</a></li>
-                <li><a href="edit.html">Edit</a></li>
-                <div class="login-container">
-                    <li><a href="#" onclick="LogOff()">Log out</a></li>
-                </div>
-            </ul>
-        </div>
-            <div class="footer">
-                <p>I Love Football Corporations &copy;</p>
+    <div class="topnav">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="suggestionbox.html">Suggestion Box</a></li>
+            <li><a href="edit.html">Edit</a></li>
+            <div class="login-container">
+                <li><a href="login.html">Log out</a></li>
             </div>
-</body >
-</html >
+        </ul>
+    </div>
+    <div>
+        <table id="reported-posts" style="width:80%">
+            <tr>
+                <th>Reported Posts ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Option</th>
+            </tr>
+            <tr>
+                <td>133</td>
+                <td>Smaj88</td>
+                <td>smaj88@email.com</td>
+                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
+                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
+            </tr>
+            <tr>
+                <td>78</td>
+                <td>Smaj88</td>
+                <td>smaj88@email.com</td>
+                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
+                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
+
+            </tr>
+            <tr>
+                <td>56</td>
+                <td>jada2</td>
+                <td>jada2@email.com</td>
+                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
+                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
+
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p>#1 Football Lessons Messaging App &copy;</p>
+    </div>
+</body>
+</html>
