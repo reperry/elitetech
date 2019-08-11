@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
@@ -63,7 +63,7 @@
             var username = user.username;
             var isadmin = user.isadmin;
 
-            var table = document.getElementById("reported-posts");
+            var table = document.getElementById("users-table");
             var row = table.insertRow(-1);
             row.innerHTML = `<tr>
                             <td>${userid}</td>
@@ -99,15 +99,27 @@
         </ul>
     </div>
     <div>
-        <table id="reported-posts" style="width:80%">
+        <table id="users-table" style="width:80%;margin:80px;">
+            <caption style="font-size:20pt;"><strong>List of Users</strong></caption>
             <tr>
-                <th>User ID</th>
+                <th>Users ID</th>
                 <th>Username</th>
                 <th>Is Admin?</th>
                 <th>Options</th>
             </tr>
         </table>
     </div>
+    <div>
+            <table id="reports-table" style="width:80%;margin:80px;">
+                <caption style="font-size:20pt;"><strong>List of Reported Posts</strong></caption>
+                <tr>
+                    <th>Users ID</th>
+                    <th>Username</th>
+                    <th>Is Admin?</th>
+                    <th>Options</th>
+                </tr>
+            </table>
+        </div>
     <div class="footer">
         <p>#1 Football Lessons Messaging App &copy;</p>
     </div>

@@ -90,11 +90,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\BouncyCastle.Crypto.dll" />
+    <Content Include="bin\Google.Protobuf.dll" />
+    <Content Include="bin\Google.Protobuf.xml" />
+    <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\MySql.Data.xml" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\ProjectTemplate.dll" />
+    <Content Include="bin\ProjectTemplate.pdb" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.xml" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.xml" />
+    <Content Include="bin\System.Web.Http.xml" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="obj\Debug\ProjectTemplate.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ProjectTemplate.dll" />
+    <Content Include="obj\Debug\ProjectTemplate.pdb" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="templates\css\login_page.css" />
     <Content Include="templates\css\main.css" />
+    <Content Include="templates\css\suggestion_box_page.css" />
     <Content Include="templates\html\edit.html" />
     <Content Include="templates\html\home.html" />
     <Content Include="templates\html\login.html" />
@@ -169,14 +188,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Post.cs" />
     <Compile Include="ProjectServices.asmx.cs">
       <DependentUpon>ProjectServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\ProjectTemplate.dll.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\ProjectTemplate.csproj.CopyComplete" />
+    <Content Include="obj\Debug\ProjectTemplate.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\ProjectTemplate.csprojResolveAssemblyReference.cache" />
     <None Include="packages.config" />
     <Content Include="templates\SpartansTemplate\Alliance-logo-06-26-2015.pdf" />
     <None Include="Web.Debug.config">
@@ -190,6 +219,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="templates\js\" />
   </ItemGroup>
   <PropertyGroup>

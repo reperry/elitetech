@@ -10,6 +10,10 @@
   margin: 30px; 
 }
 
+.post-box {
+    width: 800px;
+    height: 200px;
+}
 .date {
   font-size: 10pt; 
   color: grey; 
@@ -33,7 +37,7 @@
 #myInput {
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
-  width: 70%; /* Full-width */
+  width: 40%; /* Full-width */
   font-size: 16px; /* Increase font-size */
   padding: 12px 20px 12px 40px; /* Add some padding */
   border: 1px solid #ddd; /* Add a grey border */
