@@ -97,7 +97,9 @@ namespace ProjectTemplate
             try
             {
                 string uid;
-
+                if (content == "") {
+                    content = "Other";
+                }
                 if (isAnon)
                 {
                     //anonymous userid in the database
@@ -301,11 +303,45 @@ namespace ProjectTemplate
         }
 
         [WebMethod]
-        public DataTable GetUsers()
+        public User[] GetUsers()
         {
             try
             {
-                string query = $"select * from Users";
+                string query = $"select UserID, Username, IsAdmin from Users";
+
+                MySqlConnection con = new MySqlConnection(getConString());
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable("users");
+                adapter.Fill(table);
+
+                List<User> users = new List<User>();
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    users.Add(new User
+                    {
+                        userid = table.Rows[i][0].ToString(),
+                        username = table.Rows[i][1].ToString(),
+                        isadmin = Convert.ToBoolean(table.Rows[i][2])
+                    });
+                }
+
+                return users.ToArray();
+            }
+            catch (Exception e)
+            {
+                return new User[0];
+            }
+
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string MakeAdmin(string userid)
+        {
+            try
+            {
+                string query = $"UPDATE Users SET IsAdmin = 1 WHERE UserID = {userid}";
 
                 ////////////////////////////////////////////////////////////////////////
                 ///here's an example of using the getConString method!
@@ -317,17 +353,12 @@ namespace ProjectTemplate
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 adapter.Fill(table);
-                
-                return table;
-                //String result = DataSetToJSON(set);
-                //return result;
+                return "Success!";
             }
             catch (Exception e)
             {
-                //return "Error: " + e.Message;
-                return new DataTable();
+                return "Error: " + e.Message;
             }
-
         }
 
     }
