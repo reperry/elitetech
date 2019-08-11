@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
@@ -24,6 +24,7 @@
                 dataType: "json",
                 success: function (msg) {
                     alert(msg.d);
+                    location.reload(true)
                 },
                 error: function (e) {
                     var response = e.d;
@@ -44,6 +45,49 @@
                 dataType: "json",
                 success: function (msg) {
                     alert(msg.d);
+                    location.reload(true)
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
+
+        function DeletePost(postid) {
+            var webMethod = "../../ProjectServices.asmx/DeletePost";
+            var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                    location.reload(true)
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
+
+        function ClearReport(postid) {
+            var webMethod = "../../ProjectServices.asmx/ClearReport";
+            var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                    location.reload(true)
                 },
                 error: function (e) {
                     var response = e.d;
@@ -74,6 +118,29 @@
                         </tr>`;
         }
 
+        function LoadAllReports(array) {
+            for (var i = 0; i < array.length; i++) {
+                ShowReport(array[i]);
+            }
+        }
+
+        function ShowReport(post) {
+            var postid = post.postid;
+            var username = post.user;
+            var content = post.content;
+            var likes = post.likes;
+
+            var table = document.getElementById("reports-table");
+            var row = table.insertRow(-1);
+            row.innerHTML = `<tr>
+                            <td>${username}</td>
+                            <td>${content}</td>
+                            <td>${likes}</td>
+                            <td><button class="view-button" onclick="javascript: ClearReport(${postid});" style="font-size:20px;border-radius:0.25rem;">Clear Report</button>
+                                <button class="delete-button" onclick="javascript: DeletePost(${postid});" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
+                        </tr>`;
+        }
+
         window.onload = function () {
             $.ajax({
                 type: "POST",
@@ -84,6 +151,17 @@
 
                 success: function (data) {
                     LoadAllUsers(data.d);
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "../../ProjectServices.asmx/GetReports",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {7
+                    LoadAllReports(data.d);
                 }
             });
         }
@@ -113,9 +191,9 @@
             <table id="reports-table" style="width:80%;margin:80px;">
                 <caption style="font-size:20pt;"><strong>List of Reported Posts</strong></caption>
                 <tr>
-                    <th>Users ID</th>
-                    <th>Username</th>
-                    <th>Is Admin?</th>
+                    <th>Posted By</th>
+                    <th>Post Contents</th>
+                    <th>Likes</th>
                     <th>Options</th>
                 </tr>
             </table>
