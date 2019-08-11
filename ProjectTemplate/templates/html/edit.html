@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
@@ -9,6 +9,85 @@
     <title>Edit</title>
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        function PromoteUser(userid) {
+            var webMethod = "../../ProjectServices.asmx/MakeAdmin";
+            var parameters = "{\"userid\":\"" + encodeURI(userid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
+
+        function DeleteUser(userid) {
+            var webMethod = "../../ProjectServices.asmx/DeleteUser";
+            var parameters = "{\"userid\":\"" + encodeURI(userid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
+
+        function LoadAllUsers(array) {
+            for (var i = 0; i < array.length; i++) {
+                ShowUser(array[i]);
+            }
+        }
+
+        function ShowUser(user) {
+            var userid = user.userid;
+            var username = user.username;
+            var isadmin = user.isadmin;
+
+            var table = document.getElementById("reported-posts");
+            var row = table.insertRow(-1);
+            row.innerHTML = `<tr>
+                            <td>${userid}</td>
+                            <td>${username}</td>
+                            <td>${isadmin}</td>
+                            <td><button class="view-button" onclick="javascript: PromoteUser(${userid});" style="font-size:20px;border-radius:0.25rem;">Promote</button>
+                                <button class="delete-button" onclick="javascript: DeleteUser(${userid});" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
+                        </tr>`;
+        }
+
+        window.onload = function () {
+            $.ajax({
+                type: "POST",
+                url: "../../ProjectServices.asmx/GetUsers",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {
+                    LoadAllUsers(data.d);
+                }
+            });
+        }
+    </script>
     <div class="topnav">
         <ul>
             <li><a href="home.html">Home</a></li>
@@ -22,33 +101,10 @@
     <div>
         <table id="reported-posts" style="width:80%">
             <tr>
-                <th>Reported Posts ID</th>
+                <th>User ID</th>
                 <th>Username</th>
-                <th>Email</th>
-                <th>Option</th>
-            </tr>
-            <tr>
-                <td>133</td>
-                <td>Smaj88</td>
-                <td>smaj88@email.com</td>
-                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
-                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
-            </tr>
-            <tr>
-                <td>78</td>
-                <td>Smaj88</td>
-                <td>smaj88@email.com</td>
-                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
-                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
-
-            </tr>
-            <tr>
-                <td>56</td>
-                <td>jada2</td>
-                <td>jada2@email.com</td>
-                <td><button class="view-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">View</button>
-                <button class="delete-button" onclick="javascript: DeletePost();" style="font-size:20px;border-radius:0.25rem;">Delete</button></td>
-
+                <th>Is Admin?</th>
+                <th>Options</th>
             </tr>
         </table>
     </div>
