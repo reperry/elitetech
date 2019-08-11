@@ -156,6 +156,31 @@ namespace ProjectTemplate
         }
 
         [WebMethod(EnableSession = true)]
+        public string ClearReport(string postid)
+        {
+            try
+            {
+                string query = $"UPDATE Posts SET IsReported = 0 WHERE Postid = {postid}";
+
+                ////////////////////////////////////////////////////////////////////////
+                ///here's an example of using the getConString method!
+                ////////////////////////////////////////////////////////////////////////
+                MySqlConnection con = new MySqlConnection(getConString());
+                ////////////////////////////////////////////////////////////////////////
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                return "Success!";
+            }
+            catch (Exception e)
+            {
+                return "Error: " + e.Message;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string LikePost(string postid)
         {
             try
@@ -293,6 +318,42 @@ namespace ProjectTemplate
                     });
                 }
               
+                return posts.ToArray();
+            }
+            catch (Exception e)
+            {
+                return new Post[0];
+            }
+
+        }
+
+        [WebMethod]
+        public Post[] GetReports()
+        {
+            try
+            {
+                string query = $"select Posts.PostID, Posts.Content, Posts.Likes, Posts.TimeStamp, Users.Username from Posts inner join Users on Posts.UserID = Users.UserID where IsReported ='1'";
+
+                MySqlConnection con = new MySqlConnection(getConString());
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable("posts");
+                adapter.Fill(table);
+
+                List<Post> posts = new List<Post>();
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    posts.Add(new Post
+                    {
+                        postid = table.Rows[i][0].ToString(),
+                        content = table.Rows[i][1].ToString(),
+                        likes = Convert.ToInt32(table.Rows[i][2]),
+                        timestamp = DateTime.Parse(table.Rows[i][3].ToString()).ToString("MMMM dd, yyyy"),
+                        user = table.Rows[i][4].ToString()
+                    });
+                }
+
                 return posts.ToArray();
             }
             catch (Exception e)
