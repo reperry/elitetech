@@ -80,25 +80,58 @@
 
             var table = document.getElementById("suggestions");
             var row = table.insertRow(-1);
-            row.innerHTML = `<div class="suggestion-tables" id="${postid}">
+            row.innerHTML = `<div class="suggestion-tables">
         <p>
             <p><strong>${user}</strong></p>
             <p class="date">${timestamp}</p> 
             ${content}
             <p class="count-likes">${likes} Likes</p> 
             <p class="buttons">
-                <button class="like-button" onclick="javascript: LikePost();">Like
+                <button class="like-button" onclick="javascript: LikePost(${postid});">Like
                     <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
-                <button class="report-button" onclick="javascript: ReportPost();">Report</button>
+                <button class="report-button" onclick="javascript: ReportPost(${postid});">Report</button>
             </p>
         </p> 
     </div>`;
         }
-        function LikePost() {
-            //code hereee
+        function LikePost(postid) {
+            var webMethod = "../../ProjectServices.asmx/LikePost";
+            var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
         }
-        function ReportPost() {
-            //codddeee
+        function ReportPost(postid) {
+
+            var webMethod = "../../ProjectServices.asmx/ReportPost";
+            var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    alert(msg.d);
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
         }
 
         // Loads Post when page is opened
@@ -124,6 +157,7 @@
             <li><a href="edit.html">Edit</a></li>
             <div class="login-container">
             <li><a href="#" onclick="LogOff()">Logout</a></li>
+            </div>
         </ul>
     </div>
     <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
