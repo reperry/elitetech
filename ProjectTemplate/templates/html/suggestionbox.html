@@ -34,6 +34,7 @@
                 dataType: "json",
                 success: function (msg) {
                     alert(msg.d);
+                    location.reload(true);
                 },
                 error: function (e) {
                     var response = e.d;
