@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Nunito'>
@@ -12,6 +12,28 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
+
+        function IsAdmin() {
+            var webMethod = "../../ProjectServices.asmx/IsAdmin";
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d == 1) {
+                        document.getElementById("edit").style.visibility = "visible";
+                    }
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
+
         function LogOff() {
             var webMethod = "../../ProjectServices.asmx/LogOff";
             $.ajax({
@@ -36,12 +58,16 @@
                 }
             });
         }
+
+        window.onload = function () {
+            IsAdmin();
+        }
     </script>
     <div class="topnav">
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="home.html" >Home</a></li>
             <li><a href="suggestionbox.html">Suggestion Box</a></li>
-            <li><a href="edit.html">Edit</a></li>
+            <li><a href="edit.html" style="visibility: hidden" id="edit">Edit</a></li>
             <div class="login-container">
             <li><a href="#" onclick="LogOff()">Logout</a></li>
             </div>
