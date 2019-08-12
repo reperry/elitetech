@@ -15,6 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+        // Checks the session token if logged in user is an admin
+        // Returns 0 for no, 1 for yes, and -1 for not logged in
         function IsAdmin() {
             var webMethod = "../../ProjectServices.asmx/IsAdmin";
             //jQuery ajax method
@@ -26,6 +28,7 @@
                 dataType: "json",
                 success: function (msg) {
                     if (msg.d == 1) {
+                        // makes edit bar accessible if user is admin
                         document.getElementById("edit").style.visibility = "visible";
                     }
                 },
@@ -36,9 +39,9 @@
             });
         }
 
-
+        // takes user input and sends it to database
         function AddPost() {
-            //get my values
+            //get values from input form
             var selection = document.getElementById("category");
             var category = selection.options[selection.selectedIndex].value;
             var content = document.getElementById("post").textContent;
@@ -53,6 +56,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    // notifies success then refreshes page to update tables
                     alert(msg.d);
                     location.reload(true);
                 },
@@ -63,8 +67,9 @@
             });
         }
 
+        // uses combination of search bar and sorting bars to alter posts included in table
         function SearchPost() {
-
+            // get values from user input
             var selection = document.getElementById("catselect");
             var category = selection.options[selection.selectedIndex].value;
 
@@ -88,6 +93,7 @@
             });
         }
 
+        // returns user to login screen and terminates session
         function LogOff() {
             var webMethod = "../../ProjectServices.asmx/LogOff";
             $.ajax({
@@ -110,6 +116,7 @@
             });
         }
 
+        // clears current posts table then calls ShowPost for all posts in array
         function LoadAllPosts(array) {
             for (var i = document.getElementById("suggestions").rows.length; i > 0; i--) {
                 document.getElementById("suggestions").deleteRow(i - 1);
@@ -119,6 +126,7 @@
             }
         }
 
+        // generates table row using information from database and populates posts table
         function ShowPost(post) {
             var postid = post.postid;
             var content = post.content;
@@ -143,6 +151,10 @@
         </p> 
     </div>`;
         }
+
+        // increments like on post, then disables button from being clicked
+        // if table is reloaded, button can be clicked again (design oversight)
+        // can't find way to update table without refreshing page which would be annoying to user (design oversight)
         function LikePost(postid) {
             var webMethod = "../../ProjectServices.asmx/LikePost";
             var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
@@ -164,6 +176,8 @@
                 }
             });
         }
+
+        // Changes value in database so post is added to reported list
         function ReportPost(postid) {
 
             var webMethod = "../../ProjectServices.asmx/ReportPost";
@@ -185,7 +199,8 @@
             });
         }
 
-        // Loads Post when page is opened
+        // Checks if user is admin to load edit bar
+        // Loads Posts when page is opened
         window.onload = function () {
 
             var parameters = "{\"keyword\":\"" + encodeURI("") + "\",\"category\":\"" + encodeURI("") + "\",\"sortby\":\"" + encodeURI("") + "\"}";
@@ -225,7 +240,7 @@
             <p>
                 Select category:
                 <select id="category">
-                    <option value="">------------Choose Category------------</option>
+                    <option value="Other">------------Choose Category------------</option>
                     <option value="Suggestion">Suggestion</option>
                     <option value="Complaint">Complaint</option>
                     <option value="Other">Other</option>
