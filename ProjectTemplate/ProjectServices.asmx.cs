@@ -68,6 +68,37 @@ namespace ProjectTemplate
         }
 
         [WebMethod(EnableSession = true)]
+        public int IsAdmin() {
+
+            try
+            {
+                string query = $"select IsAdmin from Users where UserID = {Session["UserId"]}";
+
+                MySqlConnection con = new MySqlConnection(getConString());
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+
+                if (Convert.ToInt32(table.Rows[0][0]) == 1)
+                {
+                    Debug.WriteLine(1);
+                    return 1;
+                }
+
+                else
+                {
+                    Debug.WriteLine(0);
+                    return 0;
+                }
+            }
+            catch (Exception e) {
+                return -1;
+            }
+           
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddUser(string uname, string pass)
         {
             try
@@ -444,13 +475,6 @@ namespace ProjectTemplate
             }
         }
 
-        [WebMethod(EnableSession = true)]
-        public bool HideNav()
-        {
-            bool isadmin = false;
-            isadmin = Convert.ToBoolean(Session["IsAdmin"]);
-            return isadmin; 
-        }
 
     }
 }
