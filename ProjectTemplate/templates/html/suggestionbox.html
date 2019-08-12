@@ -1,4 +1,4 @@
-﻿ 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +15,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+        function IsAdmin() {
+            var webMethod = "../../ProjectServices.asmx/IsAdmin";
+            //jQuery ajax method
+            $.ajax({
+                type: "POST",
+                url: webMethod,
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d == 1) {
+                        document.getElementById("edit").style.visibility = "visible";
+                    }
+                },
+                error: function (e) {
+                    var response = e.d;
+                    alert("this code will only execute if javascript is unable to access the webservice." + response);
+                }
+            });
+        }
 
 
         function AddPost() {
@@ -78,10 +98,10 @@
                 success: function (msg) {
                     if (msg.d) {
                         window.location.replace("login.html");
-                        alert("Succesfully Logged Out");
+                        alert("Succesfully Logged Out"); 
                     }
                     else {
-                        alert("Failed to log out");
+                        alert("Failed to log out"); 
                     }
                 },
                 error: function (e) {
@@ -94,7 +114,7 @@
             for (var i = document.getElementById("suggestions").rows.length; i > 0; i--) {
                 document.getElementById("suggestions").deleteRow(i - 1);
             }
-            for (var i = 0; i < array.length; i++) {
+            for (var i = 0; i < array.length; i++){
                 ShowPost(array[i]);
             }
         }
@@ -110,18 +130,18 @@
             var table = document.getElementById("suggestions");
             var row = table.insertRow(-1);
             row.innerHTML = `<div class="suggestion-tables">
-            <p>
-                <p><strong>${user}</strong></p>
-                <p class="date">${timestamp}</p>
-                <p style="width:800px;height:200px;">${content}</p>
-                <p class="count-likes">${likes} Likes</p>
-                <p class="buttons">
-                    <button class="like-button" onclick="javascript: LikePost(${postid});">Like
-                        <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
-                    <button class="report-button" onclick="javascript: ReportPost(${postid});">Report</button>
-                </p>
+        <p>
+            <p><strong>${user}</strong></p>
+            <p class="date">${timestamp}</p> 
+            <p style="width:800px;height:200px;">${content}</p>
+            <p class="count-likes">${likes} Likes</p> 
+            <p class="buttons">
+                <button class="like-button" onclick="javascript: LikePost(${postid});">Like
+                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
+                <button class="report-button" onclick="javascript: ReportPost(${postid});">Report</button>
             </p>
-        </div>`;
+        </p> 
+    </div>`;
         }
         function LikePost(postid) {
             var webMethod = "../../ProjectServices.asmx/LikePost";
@@ -162,20 +182,6 @@
                 }
             });
         }
-        function HideNav() {
-            var webMethod = "../../ProjectServices.asmx/HideNav";
-            var editbar = document.getElementByClass("edit");
-                    if (msg.d) {
-                        editbar.innerHTML = `<li><a href="edit.html" style="visibility:hidden">Edit</a></li>`;
-                    }
-                    else {
-                        nav.innerHTML = `<li><a href="edit.html">Edit</a></li>`;
-                    }
-        }
-
-        window.onload = function () {
-            HideNav(); 
-        }
 
         // Loads Post when page is opened
         window.onload = function () {
@@ -189,23 +195,24 @@
                 dataType: 'json',
 
                 success: function (data) {
+                    IsAdmin();
                     LoadAllPosts(data.d);
-                }
+                } 
             });
         }
 
     </script>
-
     <div class="topnav">
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="suggestionbox.html">Suggestion Box</a></li>
-            <li class="edit"><!--<a href="edit.html" style="visibility:hidden">Edit</a>--></li>
+            <li><a href="edit.html" style="visibility: hidden" id="edit">Edit</a></li>
             <div class="login-container">
-                <li><a href="#" onclick="LogOff()">Logout</a></li>
+            <li><a href="#" onclick="LogOff()">Logout</a></li>
             </div>
         </ul>
     </div>
+    <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
     <div class="headers">
         <!-- Suggestion Box -->
     </div>
@@ -247,7 +254,8 @@
         <button class="button" onclick="javascript: SearchPost();">Search</button>
     </p>
 
-    <table id="suggestions"></table>
+    <table id="suggestions">
+    </table>
 
     <div class="footer">
         <p>I Love Football Corporations &copy;</p>
