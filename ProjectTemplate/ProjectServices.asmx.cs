@@ -7,6 +7,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
+
 
 namespace ProjectTemplate
 {
@@ -293,38 +295,67 @@ namespace ProjectTemplate
         }
 
         [WebMethod]
-        public Post[] GetPosts()
+        public Post[] GetPosts(string keyword, string category, string sortby)
         {
             try
             {
                 string query = $"select Posts.PostID, Posts.Content, Posts.Likes, Posts.TimeStamp, Users.Username from Posts inner join Users on Posts.UserID = Users.UserID";
 
+                if (keyword != "")
+                {
+                    query += $" where Posts.Content like '%{keyword}%'";
+
+                    if (category != "")
+                    {
+                        query += $" and Posts.Category = '{category}'";
+                    }
+                }
+                else {
+                    if (category != "")
+                    {
+                        query += $" where Posts.Category = '{category}'";
+                    }
+                }
+
+                if (sortby != "") {
+                    sortby = sortby.Replace("%20", " ");
+                    query += $" order by {sortby}";
+                }
+
+                Debug.WriteLine(query);
+
                 MySqlConnection con = new MySqlConnection(getConString());
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable("posts");
                 adapter.Fill(table);
 
-                List<Post> posts = new List<Post>();
-                for (int i = 0; i < table.Rows.Count; i++) {
-                    posts.Add(new Post
-                    {
-                        postid = table.Rows[i][0].ToString(),
-                        content = table.Rows[i][1].ToString(),
-                        likes = Convert.ToInt32(table.Rows[i][2]),
-                        timestamp = DateTime.Parse(table.Rows[i][3].ToString()).ToString("MMMM dd, yyyy"),
-                        user = table.Rows[i][4].ToString()
-                    });
-                }
-              
-                return posts.ToArray();
+                return PackagePosts(table).ToArray();
             }
             catch (Exception e)
             {
                 return new Post[0];
             }
 
+        }
+
+        public List<Post> PackagePosts(DataTable table) {
+
+            List<Post> posts = new List<Post>();
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                posts.Add(new Post
+                {
+                    postid = table.Rows[i][0].ToString(),
+                    content = table.Rows[i][1].ToString(),
+                    likes = Convert.ToInt32(table.Rows[i][2]),
+                    timestamp = DateTime.Parse(table.Rows[i][3].ToString()).ToString("MMMM dd, yyyy"),
+                    user = table.Rows[i][4].ToString()
+                });
+            }
+            return posts;
         }
 
         [WebMethod]
@@ -337,25 +368,16 @@ namespace ProjectTemplate
                 MySqlConnection con = new MySqlConnection(getConString());
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
+
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable table = new DataTable("posts");
                 adapter.Fill(table);
 
-                List<Post> posts = new List<Post>();
-                for (int i = 0; i < table.Rows.Count; i++)
-                {
-                    posts.Add(new Post
-                    {
-                        postid = table.Rows[i][0].ToString(),
-                        content = table.Rows[i][1].ToString(),
-                        likes = Convert.ToInt32(table.Rows[i][2]),
-                        timestamp = DateTime.Parse(table.Rows[i][3].ToString()).ToString("MMMM dd, yyyy"),
-                        user = table.Rows[i][4].ToString()
-                    });
-                }
-
-                return posts.ToArray();
+                return PackagePosts(table).ToArray();
             }
+
+
             catch (Exception e)
             {
                 return new Post[0];
@@ -421,6 +443,7 @@ namespace ProjectTemplate
                 return "Error: " + e.Message;
             }
         }
+
 
     }
 }
