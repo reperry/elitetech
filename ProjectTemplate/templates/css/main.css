@@ -193,3 +193,7 @@ th {
     .report-button:hover {
         background: grey;
     }
+
+.hidden {
+    display: none;
+}

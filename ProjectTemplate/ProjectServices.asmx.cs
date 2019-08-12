@@ -444,6 +444,13 @@ namespace ProjectTemplate
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public bool HideNav()
+        {
+            bool isadmin = false;
+            isadmin = Convert.ToBoolean(Session["IsAdmin"]);
+            return isadmin; 
+        }
 
     }
 }

@@ -1,4 +1,4 @@
- 
+﻿ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,10 +78,10 @@
                 success: function (msg) {
                     if (msg.d) {
                         window.location.replace("login.html");
-                        alert("Succesfully Logged Out"); 
+                        alert("Succesfully Logged Out");
                     }
                     else {
-                        alert("Failed to log out"); 
+                        alert("Failed to log out");
                     }
                 },
                 error: function (e) {
@@ -94,7 +94,7 @@
             for (var i = document.getElementById("suggestions").rows.length; i > 0; i--) {
                 document.getElementById("suggestions").deleteRow(i - 1);
             }
-            for (var i = 0; i < array.length; i++){
+            for (var i = 0; i < array.length; i++) {
                 ShowPost(array[i]);
             }
         }
@@ -110,18 +110,18 @@
             var table = document.getElementById("suggestions");
             var row = table.insertRow(-1);
             row.innerHTML = `<div class="suggestion-tables">
-        <p>
-            <p><strong>${user}</strong></p>
-            <p class="date">${timestamp}</p> 
-            <p style="width:800px;height:200px;">${content}</p>
-            <p class="count-likes">${likes} Likes</p> 
-            <p class="buttons">
-                <button class="like-button" onclick="javascript: LikePost(${postid});">Like
-                    <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
-                <button class="report-button" onclick="javascript: ReportPost(${postid});">Report</button>
+            <p>
+                <p><strong>${user}</strong></p>
+                <p class="date">${timestamp}</p>
+                <p style="width:800px;height:200px;">${content}</p>
+                <p class="count-likes">${likes} Likes</p>
+                <p class="buttons">
+                    <button class="like-button" onclick="javascript: LikePost(${postid});">Like
+                        <i class="fa fa-heart" style="font-size:20px;color:red;"></i></button>
+                    <button class="report-button" onclick="javascript: ReportPost(${postid});">Report</button>
+                </p>
             </p>
-        </p> 
-    </div>`;
+        </div>`;
         }
         function LikePost(postid) {
             var webMethod = "../../ProjectServices.asmx/LikePost";
@@ -162,6 +162,32 @@
                 }
             });
         }
+        function HideNav() {
+            var webMethod = "../../ProjectServices.asmx/HideNav";
+            var nav = document.getElementByClass("topnav");
+                    if (msg.d) {
+                        nav.innerHTML = `<ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="suggestionbox.html">Suggestion Box</a></li>
+                        <li><a href="edit.html">Edit</a></li>
+                        <div class="login-container">
+                            <li><a href="#" onclick="LogOff()">Logout</a></li>
+                        </div>
+                        </ul>`;
+                    }
+                    else {
+                        nav.innerHTML = `<ul>
+                            <li><a href="home.html">Home</a></li>
+                            <div class="login-container">
+                            <li><a href="#" onclick="LogOff()">Logout</a></li>
+                            </div>
+                            </ul>`;
+                    }
+        }
+
+        window.onload = function () {
+            HideNav(); 
+        }
 
         // Loads Post when page is opened
         window.onload = function () {
@@ -176,20 +202,21 @@
 
                 success: function (data) {
                     LoadAllPosts(data.d);
-                } 
+                }
             });
         }
 
     </script>
+
     <div class="topnav">
-        <ul>
+        <!--<ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="suggestionbox.html">Suggestion Box</a></li>
             <li><a href="edit.html">Edit</a></li>
             <div class="login-container">
-            <li><a href="#" onclick="LogOff()">Logout</a></li>
+                <li><a href="#" onclick="LogOff()">Logout</a></li>
             </div>
-        </ul>
+        </ul>-->
     </div>
     <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
     <div class="headers">
@@ -233,8 +260,7 @@
         <button class="button" onclick="javascript: SearchPost();">Search</button>
     </p>
 
-    <table id="suggestions">
-    </table>
+    <table id="suggestions"></table>
 
     <div class="footer">
         <p>I Love Football Corporations &copy;</p>
