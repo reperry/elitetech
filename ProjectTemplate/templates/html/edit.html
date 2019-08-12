@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
 
+        // used to make user an admin 
         function PromoteUser(userid) {
             var webMethod = "../../ProjectServices.asmx/MakeAdmin";
             var parameters = "{\"userid\":\"" + encodeURI(userid) + "\"}";
@@ -23,6 +24,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    // notifies success then refreshes page to update tables
                     alert(msg.d);
                     location.reload(true)
                 },
@@ -33,6 +35,7 @@
             });
         }
 
+        // used to delete user from database
         function DeleteUser(userid) {
             var webMethod = "../../ProjectServices.asmx/DeleteUser";
             var parameters = "{\"userid\":\"" + encodeURI(userid) + "\"}";
@@ -44,6 +47,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    // notifies success then refreshes page to update tables
                     alert(msg.d);
                     location.reload(true)
                 },
@@ -54,6 +58,7 @@
             });
         }
 
+        // used to delete post from database
         function DeletePost(postid) {
             var webMethod = "../../ProjectServices.asmx/DeletePost";
             var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
@@ -65,6 +70,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    // notifies success then refreshes page to update tables
                     alert(msg.d);
                     location.reload(true)
                 },
@@ -75,6 +81,7 @@
             });
         }
 
+        //used to remove post from reported list
         function ClearReport(postid) {
             var webMethod = "../../ProjectServices.asmx/ClearReport";
             var parameters = "{\"postid\":\"" + encodeURI(postid) + "\"}";
@@ -96,12 +103,14 @@
             });
         }
 
+        // loops array and calls ShowUser for each item
         function LoadAllUsers(array) {
             for (var i = 0; i < array.length; i++) {
                 ShowUser(array[i]);
             }
         }
 
+        // generates a table row for each user and adds it to user list
         function ShowUser(user) {
             var userid = user.userid;
             var username = user.username;
@@ -118,12 +127,14 @@
                         </tr>`;
         }
 
+        // loops array and calls ShowReport for each item
         function LoadAllReports(array) {
             for (var i = 0; i < array.length; i++) {
                 ShowReport(array[i]);
             }
         }
 
+        // generates a table row for each reported post and adds it to reported list
         function ShowReport(post) {
             var postid = post.postid;
             var username = post.user;
@@ -141,6 +152,7 @@
                         </tr>`;
         }
 
+        // when the page loads, calls functions to fill two tables
         window.onload = function () {
             $.ajax({
                 type: "POST",
