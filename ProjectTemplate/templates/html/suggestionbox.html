@@ -164,24 +164,12 @@
         }
         function HideNav() {
             var webMethod = "../../ProjectServices.asmx/HideNav";
-            var nav = document.getElementByClass("topnav");
+            var editbar = document.getElementByClass("edit");
                     if (msg.d) {
-                        nav.innerHTML = `<ul>
-                        <li><a href="home.html">Home</a></li>
-                        <li><a href="suggestionbox.html">Suggestion Box</a></li>
-                        <li><a href="edit.html">Edit</a></li>
-                        <div class="login-container">
-                            <li><a href="#" onclick="LogOff()">Logout</a></li>
-                        </div>
-                        </ul>`;
+                        editbar.innerHTML = `<li><a href="edit.html" style="visibility:hidden">Edit</a></li>`;
                     }
                     else {
-                        nav.innerHTML = `<ul>
-                            <li><a href="home.html">Home</a></li>
-                            <div class="login-container">
-                            <li><a href="#" onclick="LogOff()">Logout</a></li>
-                            </div>
-                            </ul>`;
+                        nav.innerHTML = `<li><a href="edit.html">Edit</a></li>`;
                     }
         }
 
@@ -209,16 +197,15 @@
     </script>
 
     <div class="topnav">
-        <!--<ul>
+        <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="suggestionbox.html">Suggestion Box</a></li>
-            <li><a href="edit.html">Edit</a></li>
+            <li class="edit"><!--<a href="edit.html" style="visibility:hidden">Edit</a>--></li>
             <div class="login-container">
                 <li><a href="#" onclick="LogOff()">Logout</a></li>
             </div>
-        </ul>-->
+        </ul>
     </div>
-    <!-- <li><img src="logo.png" ALT="some text" WIDTH=50 HEIGHT=40></li>  -->
     <div class="headers">
         <!-- Suggestion Box -->
     </div>
