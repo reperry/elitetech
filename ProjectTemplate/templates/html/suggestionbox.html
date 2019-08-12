@@ -1,4 +1,4 @@
-﻿ 
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +43,31 @@
             });
         }
 
+        function SearchPost() {
+
+            var selection = document.getElementById("catselect");
+            var category = selection.options[selection.selectedIndex].value;
+
+            selection = document.getElementById("orderby");
+            var sortby = selection.options[selection.selectedIndex].value;
+
+            var keyword = document.getElementById("myInput").value;
+
+            var parameters = "{\"keyword\":\"" + encodeURI(keyword) + "\",\"category\":\"" + encodeURI(category) + "\",\"sortby\":\"" + encodeURI(sortby) + "\"}";
+
+            $.ajax({
+                type: "POST",
+                url: "../../ProjectServices.asmx/GetPosts",
+                data: parameters,
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+
+                success: function (data) {
+                    LoadAllPosts(data.d);
+                }
+            });
+        }
+
         function LogOff() {
             var webMethod = "../../ProjectServices.asmx/LogOff";
             $.ajax({
@@ -66,6 +91,9 @@
         }
 
         function LoadAllPosts(array) {
+            for (var i = document.getElementById("suggestions").rows.length; i > 0; i--) {
+                document.getElementById("suggestions").deleteRow(i - 1);
+            }
             for (var i = 0; i < array.length; i++){
                 ShowPost(array[i]);
             }
@@ -137,10 +165,12 @@
 
         // Loads Post when page is opened
         window.onload = function () {
+
+            var parameters = "{\"keyword\":\"" + encodeURI("") + "\",\"category\":\"" + encodeURI("") + "\",\"sortby\":\"" + encodeURI("") + "\"}";
             $.ajax({
                 type: "POST",
                 url: "../../ProjectServices.asmx/GetPosts",
-                data: {},
+                data: parameters,
                 contentType: "application/json; charset=utf-8",
                 dataType: 'json',
 
@@ -185,12 +215,20 @@
     </div>
 
     <p class="selection">
-        <input type="text" id="myInput" placeholder="Keyword">
-        <select style="font-size:14pt;">
+        <input type="text" id="myInput" placeholder="Keyword" value="">
+        <select style="font-size:14pt;" id="catselect">
             <option value="">----Choose Category----</option>
-            <option value="suggestion">Suggestion</option>
-            <option value="complaint">Complaint</option>
-            <option value="other">Other</option>
+            <option value="Suggestion">Suggestion</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Other">Other</option>
+        </select>
+        <select style="font-size:14pt;" id="orderby">
+            <option value="">----Sort By----</option>
+            <option value="Posts.TimeStamp desc">Newest</option>
+            <option value="Posts.TimeStamp">Oldest</option>
+            <option value="Posts.Likes desc">Most Liked</option>
+            <option value="Users.Username">Username (A-Z)</option>
+            <option value="Users.Username desc">Username (Z-A)</option>
         </select>
         <button class="button" onclick="javascript: SearchPost();">Search</button>
     </p>
