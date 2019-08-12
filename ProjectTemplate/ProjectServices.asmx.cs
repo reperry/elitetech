@@ -19,17 +19,11 @@ namespace ProjectTemplate
 
     public class ProjectServices : System.Web.Services.WebService
     {
-        ////////////////////////////////////////////////////////////////////////
-        ///replace the values of these variables with your database credentials
-        ////////////////////////////////////////////////////////////////////////
         private string dbID = "elitetech";
         private string dbPass = "!!Cis440";
         private string dbName = "elitetech";
-        ////////////////////////////////////////////////////////////////////////
 
-        ////////////////////////////////////////////////////////////////////////
-        ///call this method anywhere that you need the connection string!
-        ////////////////////////////////////////////////////////////////////////
+
         private string getConString()
         {
             return "SERVER=107.180.1.16; PORT=3306; DATABASE=" + dbName + "; UID=" + dbID + "; PASSWORD=" + dbPass;
@@ -37,12 +31,8 @@ namespace ProjectTemplate
         ////////////////////////////////////////////////////////////////////////
 
 
-
-        /////////////////////////////////////////////////////////////////////////
-        //don't forget to include this decoration above each method that you want
-        //to be exposed as a web service!
+        // tests database connection
         [WebMethod(EnableSession = true)]
-        /////////////////////////////////////////////////////////////////////////
         public string TestConnection()
         {
             try
@@ -67,6 +57,8 @@ namespace ProjectTemplate
             }
         }
 
+        // checks if the logged in user is an admin. Used for hiding elements from non-admin
+        // returns 1 if admin, 0 if not, and -1 if user is not logged in
         [WebMethod(EnableSession = true)]
         public int IsAdmin() {
 
@@ -97,7 +89,9 @@ namespace ProjectTemplate
             }
            
         }
-
+        
+        // adds user to database
+        // currently not implemented into webpage
         [WebMethod(EnableSession = true)]
         public string AddUser(string uname, string pass)
         {
@@ -105,11 +99,7 @@ namespace ProjectTemplate
             {
                 string query = $"insert into elitetech.Users(Username, Password) values ('{uname}', '{pass}')";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -123,6 +113,7 @@ namespace ProjectTemplate
             }
         }
 
+        // adds post with user input to database
         [WebMethod(EnableSession = true)]
         public string AddPost(string content, string category, bool isAnon)
         {
@@ -163,6 +154,7 @@ namespace ProjectTemplate
             }
         }
 
+        // sets is reported in database to be true for given postid
         [WebMethod(EnableSession = true)]
         public string ReportPost(string postid)
         {
@@ -170,11 +162,7 @@ namespace ProjectTemplate
             {
                 string query = $"UPDATE Posts SET IsReported = 1 WHERE Postid = {postid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -188,6 +176,7 @@ namespace ProjectTemplate
             }
         }
 
+        // sets is reported in database to be false for given postid
         [WebMethod(EnableSession = true)]
         public string ClearReport(string postid)
         {
@@ -195,11 +184,7 @@ namespace ProjectTemplate
             {
                 string query = $"UPDATE Posts SET IsReported = 0 WHERE Postid = {postid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -213,6 +198,7 @@ namespace ProjectTemplate
             }
         }
 
+        // increments likes for given postid
         [WebMethod(EnableSession = true)]
         public string LikePost(string postid)
         {
@@ -220,11 +206,7 @@ namespace ProjectTemplate
             {
                 string query = $"UPDATE Posts SET Likes = Likes + 1 WHERE Postid = {postid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -238,6 +220,7 @@ namespace ProjectTemplate
             }
         }
 
+        // removes user with given userid from database
         [WebMethod(EnableSession = true)]
         public string DeleteUser(string userid)
         {
@@ -245,11 +228,7 @@ namespace ProjectTemplate
             {
                 string query = $"DELETE FROM Users WHERE UserID = {userid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -263,6 +242,7 @@ namespace ProjectTemplate
             }
         }
 
+        // removes post with given postid from database
         [WebMethod(EnableSession = true)]
         public string DeletePost(string postid)
         {
@@ -270,11 +250,7 @@ namespace ProjectTemplate
             {
                 string query = $"DELETE FROM Posts WHERE PostID = {postid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -288,6 +264,7 @@ namespace ProjectTemplate
             }
         }
 
+        // checks database for user credentials and creates session if they exist
         [WebMethod(EnableSession = true)]
         public bool LogOn(string un, string pass)
         {
@@ -318,6 +295,7 @@ namespace ProjectTemplate
             return success;
         }
 
+        // closes session
         [WebMethod(EnableSession = true)]
         public bool LogOff()
         {
@@ -325,6 +303,7 @@ namespace ProjectTemplate
             return true;
         }
 
+        // returns array of posts for specified query
         [WebMethod]
         public Post[] GetPosts(string keyword, string category, string sortby)
         {
@@ -372,6 +351,7 @@ namespace ProjectTemplate
 
         }
 
+        // takes data table and combines into list of posts
         public List<Post> PackagePosts(DataTable table) {
 
             List<Post> posts = new List<Post>();
@@ -389,6 +369,7 @@ namespace ProjectTemplate
             return posts;
         }
 
+        // returns list of all reported posts
         [WebMethod]
         public Post[] GetReports()
         {
@@ -416,6 +397,7 @@ namespace ProjectTemplate
 
         }
 
+        // returns list of all users
         [WebMethod]
         public User[] GetUsers()
         {
@@ -450,6 +432,7 @@ namespace ProjectTemplate
 
         }
 
+        // changes isadmin to true for given user id in database
         [WebMethod(EnableSession = true)]
         public string MakeAdmin(string userid)
         {
@@ -457,11 +440,7 @@ namespace ProjectTemplate
             {
                 string query = $"UPDATE Users SET IsAdmin = 1 WHERE UserID = {userid}";
 
-                ////////////////////////////////////////////////////////////////////////
-                ///here's an example of using the getConString method!
-                ////////////////////////////////////////////////////////////////////////
                 MySqlConnection con = new MySqlConnection(getConString());
-                ////////////////////////////////////////////////////////////////////////
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -478,3 +457,6 @@ namespace ProjectTemplate
 
     }
 }
+////// NOTE: We had so issues with useing the @ and parameters to add variables to queries.
+////// I made sure that any post that has direct user input uses that notation
+////// Otherwise, all variables are generated by functions and should give proper, preselected input
