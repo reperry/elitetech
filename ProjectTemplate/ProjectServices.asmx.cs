@@ -403,7 +403,7 @@ namespace ProjectTemplate
         {
             try
             {
-                string query = $"select UserID, Username, IsAdmin from Users";
+                string query = $"select UserID, Username, IsAdmin from Users order by UserID";
 
                 MySqlConnection con = new MySqlConnection(getConString());
 
